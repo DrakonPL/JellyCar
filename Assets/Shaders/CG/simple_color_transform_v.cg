@@ -1,0 +1,7 @@
+﻿float4 out vPosition : POSITION;
+uniform float4x4 translation;
+
+void main(float3 iPosition)
+{
+	vPosition = mul(float4(iPosition, 1.f),translation);
+}

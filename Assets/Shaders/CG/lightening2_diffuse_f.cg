@@ -1,0 +1,24 @@
+﻿out float4 color : COLOR;
+
+uniform float4 colors;
+uniform float3 lightPos;
+uniform float3 lightColor;
+
+void main(float4 vColor : COLOR,float3 FragPos : TEXCOORD0,float3 vNormal : TEXCOORD1)
+{
+	//ambient
+    float ambientStrength = 0.1f;
+    float3 ambient = ambientStrength * lightColor;
+	
+	// Diffuse 
+    float3 norm = normalize(vNormal);
+    float3 lightDir = normalize(lightPos - FragPos);
+    float diff = max(dot(norm, lightDir), 0.0f);
+    float3 diffuse = diff * lightColor;
+	
+	//final mix
+    float3 result = (ambient + diffuse) * float3(colors.x,colors.y,colors.z);
+	
+	//output
+    color = float4(result, 1.0f);
+}

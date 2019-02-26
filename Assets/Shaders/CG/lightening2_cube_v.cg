@@ -1,0 +1,13 @@
+﻿float4 out vPosition : POSITION;
+float3 out vNormal : TEXCOORD0;
+float3 out FragPos : TEXCOORD1;
+
+uniform float4x4 mvp;
+uniform float4x4 model;
+
+void main(float3 iPosition,float3 iNormal,float2 iTexCoord)
+{
+	vPosition = mul(float4(iPosition, 1.f),mvp);
+	FragPos = float3(mul(float4(iPosition, 1.f),model));
+	vNormal = float3x3(transpose(inverse(model))) * iNormal;
+}

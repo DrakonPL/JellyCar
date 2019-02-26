@@ -1,0 +1,8 @@
+﻿float4 out vPosition : POSITION;
+float4 out vColor : COLOR;
+
+void main(float3 iPosition,float3 iColor)
+{
+	vPosition = float4(iPosition, 1.f);
+	vColor = float4(iColor, 1.f);
+}

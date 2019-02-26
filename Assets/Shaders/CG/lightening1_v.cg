@@ -1,0 +1,12 @@
+﻿float4 out vPosition : POSITION;
+float2 out vTexCoord : TEXCOORD0;
+float3 out vNormal : TEXCOORD1;
+
+uniform float4x4 mvp;
+
+void main(float3 iPosition,float3 iNormal,float2 iTexCoord)
+{
+	vPosition = mul(float4(iPosition, 1.f),mvp);
+	vTexCoord = iTexCoord;
+	vNormal = iNormal;
+}

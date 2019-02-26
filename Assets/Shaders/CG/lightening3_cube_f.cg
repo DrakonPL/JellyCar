@@ -1,0 +1,32 @@
+﻿out float4 color : COLOR;
+
+uniform float4 colors;
+uniform float3 lightPos;
+uniform float3 lightColor;
+uniform float3 viewPos;
+
+void main(float4 vColor : COLOR,float3 FragPos : TEXCOORD0,float3 vNormal : TEXCOORD1)
+{
+	//ambient
+    float ambientStrength = 0.1f;
+    float3 ambient = ambientStrength * lightColor;
+	
+	// Diffuse 
+    float3 norm = normalize(vNormal);
+    float3 lightDir = normalize(lightPos - FragPos);
+    float diff = max(dot(norm, lightDir), 0.0f);
+    float3 diffuse = diff * lightColor;
+	
+	//specular
+	float specularStrength = 0.5f;
+    float3 viewDir = normalize(viewPos - FragPos);
+    float3 reflectDir = reflect(-lightDir, norm);  
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0f), 32);
+    float3 specular = specularStrength * spec * lightColor;  
+	
+	//final mix
+    float3 result = (ambient + diffuse + specular) * float3(colors.x,colors.y,colors.z);
+	
+	//output
+    color = float4(result, 1.0f);
+}

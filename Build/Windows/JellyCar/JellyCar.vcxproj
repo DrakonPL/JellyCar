@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{E74F30EC-4E61-4E70-8905-D70F67E55228}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>JellyCar</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>ANDROMEDA_PC;ANDROMEDA_GLFW;ANDROMEDA_GL3;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>../../../../Andromeda-Lib/;../../../../Andromeda-Lib/Libs;../../../../Andromeda-Lib/Libs/glm;../../../../Andromeda-Lib/Libs/tinyxml;../../../../Andromeda-Lib/Libs/freetype_gl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;freetype263.lib;irrKlang.lib;portaudio_x86.lib;Andromeda.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../../../Andromeda-Lib/Build/Windows/Debug;../../../../Andromeda-Lib/Libs/glew/lib;../../../../Andromeda-Lib/Libs/glfw/lib;../../../../Andromeda-Lib/Libs/freetype/lib;../../../../Andromeda-Lib/Libs/irrKlang/lib;../../../../Andromeda-Lib/Libs/ffmpeg/lib;../../../../Andromeda-Lib/Libs/portaudio/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>ANDROMEDA_PC;ANDROMEDA_GLFW;ANDROMEDA_GL3;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>../../../../Andromeda-Lib/;../../../../Andromeda-Lib/Libs;../../../../Andromeda-Lib/Libs/glm;../../../../Andromeda-Lib/Libs/tinyxml;../../../../Andromeda-Lib/Libs/freetype_gl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../../../../Andromeda-Lib/Build/Windows/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Andromeda.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\JellyCar\Car\Car.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\Car\Chassis.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\Car\GameBallonBody.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\Car\SuspensionShock.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\Car\Tire.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\Game\JellyCore.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\Game\JellyGame.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\Game\JellyIntro.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\Game\JellyMenuBetter.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\Game\JellyOptions.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\Game\JellySplash.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\JellyCar.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\JellyGameManager.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\Levels\GamePressureBody.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\Levels\GameSpringBody.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\Levels\KinematicControl.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\Levels\KinematicMotor.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\Levels\KinematicPlatform.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\Levels\LevelManager.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\Levels\LevelSoftBody.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\Utils\AudioHelper.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\Utils\InputHelper.cpp" />
+    <ClCompile Include="..\..\..\JellyCar\Utils\JellyHelper.cpp" />
+    <ClCompile Include="..\..\..\JellyPhysics\AABB.cpp" />
+    <ClCompile Include="..\..\..\JellyPhysics\Body.cpp" />
+    <ClCompile Include="..\..\..\JellyPhysics\ClosedShape.cpp" />
+    <ClCompile Include="..\..\..\JellyPhysics\InternalSpring.cpp" />
+    <ClCompile Include="..\..\..\JellyPhysics\PointMass.cpp" />
+    <ClCompile Include="..\..\..\JellyPhysics\PressureBody.cpp" />
+    <ClCompile Include="..\..\..\JellyPhysics\SpringBody.cpp" />
+    <ClCompile Include="..\..\..\JellyPhysics\Vector2.cpp" />
+    <ClCompile Include="..\..\..\JellyPhysics\VectorTools.cpp" />
+    <ClCompile Include="..\..\..\JellyPhysics\World.cpp" />
+    <ClCompile Include="..\..\..\Libs\tinyxml\tinystr.cpp" />
+    <ClCompile Include="..\..\..\Libs\tinyxml\tinyxml.cpp" />
+    <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlparser.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\JellyCar\Car\Car.h" />
+    <ClInclude Include="..\..\..\JellyCar\Car\Chassis.h" />
+    <ClInclude Include="..\..\..\JellyCar\Car\GameBallonBody.h" />
+    <ClInclude Include="..\..\..\JellyCar\Car\SuspensionShock.h" />
+    <ClInclude Include="..\..\..\JellyCar\Car\Tire.h" />
+    <ClInclude Include="..\..\..\JellyCar\Game\JellyCore.h" />
+    <ClInclude Include="..\..\..\JellyCar\Game\JellyGame.h" />
+    <ClInclude Include="..\..\..\JellyCar\Game\JellyIntro.h" />
+    <ClInclude Include="..\..\..\JellyCar\Game\JellyMenuBetter.h" />
+    <ClInclude Include="..\..\..\JellyCar\Game\JellyOptions.h" />
+    <ClInclude Include="..\..\..\JellyCar\Game\JellySplash.h" />
+    <ClInclude Include="..\..\..\JellyCar\JellyGameManager.h" />
+    <ClInclude Include="..\..\..\JellyCar\Levels\GamePressureBody.h" />
+    <ClInclude Include="..\..\..\JellyCar\Levels\GameSpringBody.h" />
+    <ClInclude Include="..\..\..\JellyCar\Levels\InputHelper.h" />
+    <ClInclude Include="..\..\..\JellyCar\Levels\KinematicControl.h" />
+    <ClInclude Include="..\..\..\JellyCar\Levels\KinematicMotor.h" />
+    <ClInclude Include="..\..\..\JellyCar\Levels\KinematicPlatform.h" />
+    <ClInclude Include="..\..\..\JellyCar\Levels\LevelInfo.h" />
+    <ClInclude Include="..\..\..\JellyCar\Levels\LevelManager.h" />
+    <ClInclude Include="..\..\..\JellyCar\Levels\LevelSoftBody.h" />
+    <ClInclude Include="..\..\..\JellyCar\Levels\ObjectInfo.h" />
+    <ClInclude Include="..\..\..\JellyCar\Levels\SimpleStruct\BodyObject.h" />
+    <ClInclude Include="..\..\..\JellyCar\Levels\SimpleStruct\BodyObjectInfo.h" />
+    <ClInclude Include="..\..\..\JellyCar\Levels\SimpleStruct\BodyPoint.h" />
+    <ClInclude Include="..\..\..\JellyCar\Levels\SimpleStruct\BodyPolygon.h" />
+    <ClInclude Include="..\..\..\JellyCar\Levels\SimpleStruct\BodySpring.h" />
+    <ClInclude Include="..\..\..\JellyCar\Levels\SimpleStruct\GameObject.h" />
+    <ClInclude Include="..\..\..\JellyCar\Levels\SkinInfo.h" />
+    <ClInclude Include="..\..\..\JellyCar\Utils\AudioHelper.h" />
+    <ClInclude Include="..\..\..\JellyCar\Utils\InputHelper.h" />
+    <ClInclude Include="..\..\..\JellyCar\Utils\JellyHelper.h" />
+    <ClInclude Include="..\..\..\JellyPhysics\AABB.h" />
+    <ClInclude Include="..\..\..\JellyPhysics\Bitmask.h" />
+    <ClInclude Include="..\..\..\JellyPhysics\Body.h" />
+    <ClInclude Include="..\..\..\JellyPhysics\ClosedShape.h" />
+    <ClInclude Include="..\..\..\JellyPhysics\InternalSpring.h" />
+    <ClInclude Include="..\..\..\JellyPhysics\JellyPhysics.h" />
+    <ClInclude Include="..\..\..\JellyPhysics\JellyPrerequisites.h" />
+    <ClInclude Include="..\..\..\JellyPhysics\PointMass.h" />
+    <ClInclude Include="..\..\..\JellyPhysics\PressureBody.h" />
+    <ClInclude Include="..\..\..\JellyPhysics\SpringBody.h" />
+    <ClInclude Include="..\..\..\JellyPhysics\Vector2.h" />
+    <ClInclude Include="..\..\..\JellyPhysics\VectorTools.h" />
+    <ClInclude Include="..\..\..\JellyPhysics\World.h" />
+    <ClInclude Include="..\..\..\Libs\tinyxml\tinystr.h" />
+    <ClInclude Include="..\..\..\Libs\tinyxml\tinyxml.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

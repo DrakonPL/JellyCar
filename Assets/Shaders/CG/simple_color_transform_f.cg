@@ -1,0 +1,7 @@
+﻿out float4 color : COLOR;
+uniform float4 colors;
+
+void main()
+{
+	color =  colors;
+}

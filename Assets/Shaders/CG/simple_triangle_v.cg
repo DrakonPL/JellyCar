@@ -1,0 +1,6 @@
+﻿float4 out vPosition : POSITION;
+
+void main(float3 aPosition)
+{
+	vPosition = float4(aPosition, 1.f);
+}

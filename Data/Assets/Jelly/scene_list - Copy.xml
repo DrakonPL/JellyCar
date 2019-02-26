@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Scenes>
+	<Scene name="balonik.scene" file="balonik.scene" thumb="level-tut" />
+	<Scene name="bigwheel.scene" file="bigwheel.scene" thumb="level-tut" />
+	<Scene name="boulders.scene" file="boulders.scene" thumb="level-tut" />
+	<Scene name="castle.scene" file="castle.scene" thumb="level-tut" />
+	<Scene name="cavern.scene" file="cavern.scene" thumb="level-tut" />
+	<Scene name="circle_waves.scene" file="circle_waves.scene" thumb="level-tut" />
+	<Scene name="circus.scene" file="circus.scene" thumb="level-tut" />
+	<Scene name="crusher.scene" file="crusher.scene" thumb="level-tut" />
+	<Scene name="easy2.scene" file="easy2.scene" thumb="level-tut" />
+	<Scene name="editor.scene" file="editor.scene" thumb="level-tut" />
+	<Scene name="factory.scene" file="factory.scene" thumb="level-tut" />
+	<Scene name="fronds.scene" file="fronds.scene" thumb="level-tut" />
+	<Scene name="hill.scene" file="hill.scene" thumb="level-tut" />
+	<Scene name="hlevel13.scene" file="hlevel13.scene" thumb="level-tut" />
+	<Scene name="hlevel14.scene" file="hlevel14.scene" thumb="level-tut" />
+	<Scene name="hlevel15.scene" file="hlevel15.scene" thumb="level-tut" />
+	<Scene name="huge_wheels.scene" file="huge_wheels.scene" thumb="level-tut" />
+	<Scene name="longjumplevel1.scene" file="longjumplevel1.scene" thumb="level-tut" />
+	<Scene name="longjumplevel2.scene" file="longjumplevel2.scene" thumb="level-tut" />
+	<Scene name="longjumplevel3.scene" file="longjumplevel3.scene" thumb="level-tut" />
+	<Scene name="nlevel1.scene" file="nlevel1.scene" thumb="level-tut" />
+	<Scene name="platforms.scene" file="platforms.scene" thumb="level-tut" />
+	<Scene name="plinko.scene" file="plinko.scene" thumb="level-tut" />
+	<Scene name="skijump.scene" file="skijump.scene" thumb="level-tut" />
+	<Scene name="sledding.scene" file="sledding.scene" thumb="level-tut" />
+	<Scene name="snowboarding.scene" file="snowboarding.scene" thumb="level-tut" />
+	<Scene name="spongy_bridge.scene" file="spongy_bridge.scene" thumb="level-tut" />
+	<Scene name="washer.scene" file="washer.scene" thumb="level-tut" />
+	<Scene name="wave.scene" file="wave.scene" thumb="level-tut" />
+	<Scene name="Tutorial" file="tut-scene.scene" thumb="level-tut" />
+	<Scene name="Initiation" file="elevel1.scene" thumb="easy1" besttime="9999.99" filter="10"/>
+	<Scene name="Forest" file="test-scene2.scene" thumb="level-02" />
+	<Scene name="Slide" file="elevel2.scene" thumb="easy2" besttime="9999.99"  filter="10"/>
+	<Scene name="Crusher" file="test-scene11.scene" thumb="crusher" />
+	<Scene name="Moving Platforms" file="elevel3.scene" thumb="easy3" besttime="9999.99"  filter="10"/>
+	<Scene name="Kerplunk" file="test-scene6.scene" thumb="level-06" />
+	<Scene name="Balloon Squeeze" file="elevel4.scene" thumb="easy4" besttime="9999.99"  filter="10"/>
+	<Scene name="Snake" file="snake.scene" thumb="snake" />
+	<Scene name="Lance" file="elevel5.scene" thumb="easy5" besttime="9999.99"  filter="10"/>
+	<Scene name="Cave" file="drakon.scene" thumb="cave" />
+	<Scene name="Saw" file="elevel6.scene" thumb="easy6" besttime="9999.99"  filter="10"/>
+	<Scene name="Ski Jump" file="test-scene10.scene" thumb="ski-jump" />
+	<Scene name="Spiral" file="elevel7.scene" thumb="easy7" besttime="9999.99"  filter="10"/>
+	<Scene name="Catapult" file="catapult.scene" thumb="catapult" />
+	<Scene name="Boat" file="elevel8.scene" thumb="easy8" besttime="9999.99"  filter="10"/>
+	<Scene name="Boulders" file="test-scene12.scene" thumb="boulders" />
+	<Scene name="Mouse" file="elevel9.scene" thumb="easy9" besttime="9999.99"  filter="10"/>
+	<Scene name="Factory" file="test-scene5.scene" thumb="level-05" />
+	<Scene name="Grass Lifts" file="elevel10.scene" thumb="easy10" besttime="9999.99"  filter="10"/>
+	<Scene name="Platformer" file="test-scene4.scene" thumb="level-04" />
+	<Scene name="Slow Spin" file="nlevel2.scene" thumb="normal2" besttime="9999.99"  filter="11"/>
+	<Scene name="Circus" file="test-scene3.scene" thumb="level-03" />
+	<Scene name="Descent" file="nlevel3.scene" thumb="normal3" besttime="9999.99"  filter="11"/>
+	<Scene name="Ride the Wave" file="test-scene9.scene" thumb="wave" />
+	<Scene name="Water Underneath" file="nlevel4.scene" thumb="normal4" besttime="9999.99"  filter="11"/>
+	<Scene name="Cave Escape" file="test-scene1.scene" thumb="level-01" />
+	<Scene name="Semi Circles" file="nlevel5.scene" thumb="normal5" besttime="9999.99"  filter="11"/>
+	<Scene name="The Dryer" file="test-scene8.scene" thumb="level-08" />
+	<Scene name="Space Ship" file="nlevel6.scene" thumb="normal6" besttime="9999.99"  filter="11"/>
+	<Scene name="Spongy Bridges" file="test-scene7.scene" thumb="level-07" />
+	<Scene name="Lemons" file="nlevel7.scene" thumb="normal7" besttime="9999.99"  filter="11"/>
+	<Scene name="Rocket Launch" file="rocket.scene" thumb="rocket" />
+	<Scene name="Pinwheels" file="nlevel8.scene" thumb="normal8" besttime="9999.99"  filter="11"/>
+	<Scene name="The Big Wheel" file="cheez2.scene" thumb="big-wheel" />
+	<Scene name="Up" file="nlevel9.scene" thumb="normal9" besttime="9999.99"  filter="11"/>
+	<Scene name="Circle Waves" file="waves.scene" thumb="waves" />
+	<Scene name="Horseshoes" file="nlevel10.scene" thumb="normal10" besttime="9999.99"  filter="11"/>
+	<Scene name="Jello Fortress" file="cheez3.scene" thumb="castle" />	
+	<Scene name="Launch" file="hlevel1.scene" thumb="hard1" besttime="9999.99"  filter="12"/>
+	<Scene name="Box Towers" file="cheez4.scene" thumb="blocks" />
+	<Scene name="Candy Canes" file="hlevel2.scene" thumb="hard2" besttime="9999.99"  filter="12"/>
+	<Scene name="Beware The Spikes" file="ziggy1.scene" thumb="spikes" />
+	<Scene name="Round and Round" file="hlevel3.scene" thumb="hard3" besttime="9999.99"  filter="12"/>
+	<Scene name="Grinder" file="grinder.scene" thumb="grinder" />
+	<Scene name="Boulders 2" file="hlevel4.scene" thumb="hard4" besttime="9999.99"  filter="12"/>
+	<Scene name="Homeward" file="homeward.scene" thumb="homeward" />
+	<Scene name="Float By" file="hlevel5.scene" thumb="hard5" besttime="9999.99"  filter="12"/>
+	<Scene name="Revolver" file="revolver.scene" thumb="revolver" />
+	<Scene name="Grapes" file="hlevel6.scene" thumb="hard6" besttime="9999.99"  filter="12"/>
+	<Scene name="Loading" file="loading.scene" thumb="loading" />
+	<Scene name="Homerun" file="hlevel7.scene" thumb="hard7" besttime="9999.99"  filter="12"/>
+	<Scene name="Jelly Derby" file="derby.scene" thumb="derby" />
+	<Scene name="Lift" file="hlevel8.scene" thumb="hard8" besttime="9999.99"  filter="12"/>
+	<Scene name="Piter Pan" file="piterek1.scene" thumb="piter" />
+	<Scene name="Slow Fall" file="hlevel9.scene" thumb="hard9" besttime="9999.99"  filter="12"/>
+	<Scene name="Jaklub" file="jaklub1.scene" thumb="jaklub" />
+	<Scene name="Storm the Castle" file="hlevel10.scene" thumb="hard10" besttime="9999.99"  filter="12"/>
+	<Scene name="Cogs" file="cogs.scene" thumb="cogs" />
+	<Scene name="Green Maze" file="hlevel11.scene" thumb="hard11" besttime="9999.99"  filter="12"/>
+	<Scene name="Mouse Ears" file="hlevel12.scene" thumb="hard12" besttime="9999.99"  filter="12"/>		
+</Scenes>
+

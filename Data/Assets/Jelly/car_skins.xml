@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Skins>
+	<Skin name="Classic" chassisSmall="carClassicSmall.png" chassisBig="carClassicBig.png" tireSmall="tireClassicSmall.png" tireBig="TireClassicBig.png" />
+	<Skin name="Car 65" chassisSmall="car65Small.png" chassisBig="car65Big.png" tireSmall="tire65Small.png" tireBig="Tire65Big.png" />
+	<Skin name="It's me, Mario!" chassisSmall="carmarioSmall.png" chassisBig="carmarioBig.png" tireSmall="tireMatioSmall.png" tireBig="TiremarioBig.png" />
+	<Skin name="Hell Car" chassisSmall="carhellSmall.png" chassisBig="carhellBig.png" tireSmall="tirehellSmall.png" tireBig="TireBig.png" />
+    <Skin name="Pata Car" chassisSmall="carpataSmall.png" chassisBig="carpataBig.png" tireSmall="tirepataSmall.png" tireBig="TirepataBig.png" />
+	<Skin name="Donkey Car" chassisSmall="cardkSmall.png" chassisBig="cardkBig.png" tireSmall="tiredkSmall.png" tireBig="tiredkBig.png" />
+	<Skin name="Footbal" chassisSmall="carFootballSmall.png" chassisBig="carFootballBig.png" tireSmall="tireFootballSmall.png" tireBig="TireFootballBig.png" />
+	<Skin name="Red Steel Car" chassisSmall="carbloodSmall.png" chassisBig="carbloodBig.png" tireSmall="tirebloodSmall.png" tireBig="TirebloodBig.png" />
+	<Skin name="Pac Man" chassisSmall="carPacmanSmall.png" chassisBig="carPacmanBig.png" tireSmall="tirePacmanSmall.png" tireBig="TirePacmanBig.png" />
+	<Skin name="Kitty Car" chassisSmall="carKittySmall.png" chassisBig="carKittyBig.png" tireSmall="tireKittySmall.png" tireBig="TireKittyBig.png" />
+	<Skin name="Peace" chassisSmall="carPeaceSmall.png" chassisBig="carPeaceBig.png" tireSmall="tirePeaceSmall.png" tireBig="TirePeaceBig.png" />
+</Skins>
+
