@@ -1,5 +1,3 @@
-
-
 #include "JellyGame.h"
 
 #include "../Utils/JellyHelper.h"
@@ -357,6 +355,10 @@ void JellyGame::CleanUp()
 	delete _targetSprite;
 	delete _backSprite;
 	delete _transformMeter;
+    delete _tireSprite;
+    delete _ballonSprite;
+    delete _tireSpriteBack;
+    delete _ballonSpriteBack;
 
 	//remove timer
 	delete _timer;

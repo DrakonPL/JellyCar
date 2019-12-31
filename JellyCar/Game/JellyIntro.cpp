@@ -1,5 +1,3 @@
-
-
 #include "JellyIntro.h"
 #include "JellyOptions.h"
 #include "JellyMenuBetter.h"
@@ -214,16 +212,27 @@ void JellyIntro::Draw(GameManager* manager)
 	_renderManager->ClearScreen();
 
 	//paper background
-	_backSprite->SetScale(glm::vec2(1.0f, 1.0f));
-	_backSprite->SetPosition(glm::vec2(_renderManager->GetWidth() / 4, 20));
-	_backSprite->Draw(_projection);
-	_backSprite->SetPosition(glm::vec2((_renderManager->GetWidth() / 4) * 3, 20));
-	_backSprite->Draw(_projection);
+    {
+        int backWidth = _backSprite->GetTexture()->GetWidth();
+        int backHeight = _backSprite->GetTexture()->GetHeight();
 
-	_backSprite->SetPosition(glm::vec2(_renderManager->GetWidth() / 4, 520));
-	_backSprite->Draw(_projection);
-	_backSprite->SetPosition(glm::vec2((_renderManager->GetWidth() / 4) * 3, 520));
-	_backSprite->Draw(_projection);
+        int columns = ceil((float)_renderManager->GetWidth() / (float)backWidth);
+        int rows = ceil((float)_renderManager->GetHeight() / (float)backHeight);
+
+        _backSprite->SetScale(glm::vec2(1.0f, 1.0f));
+
+        for (size_t y = 0; y < rows; y++)
+        {
+            for (size_t x = 0; x < columns; x++)
+            {
+                int posx = (backWidth * x) + (backWidth / 2);
+                int posy = (backHeight * y) + (backHeight / 2);
+
+                _backSprite->SetPosition(glm::vec2(posx, posy));
+                _backSprite->Draw(_projection);
+            }
+        }
+    }
 
 	_logoSprite->SetPosition(glm::vec2(_renderManager->GetWidth() / 2, 200));
 	_logoSprite->Draw(_projection);

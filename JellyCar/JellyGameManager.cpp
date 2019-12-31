@@ -10,6 +10,7 @@ void JellyGameManager::Configure()
 	//set pc resolution
 	#ifdef ANDROMEDA_GL3
 	{
+		//Andromeda::Graphics::RenderManager::Instance()->SetWindowSize(1920, 1080);
 		Andromeda::Graphics::RenderManager::Instance()->SetWindowSize(960, 544);
 
 		//Andromeda::Graphics::RenderManager::Instance()->SetWindowSize(-1, -1);
@@ -17,7 +18,6 @@ void JellyGameManager::Configure()
 	}
 	#endif	
 }
-
 
 void JellyGameManager::Init()
 {

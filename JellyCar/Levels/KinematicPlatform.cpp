@@ -1,5 +1,3 @@
-
-
 #include "KinematicPlatform.h"
 
 KinematicPlatform::KinematicPlatform(Body* body, const Vector2& start, const Vector2& end, float secondsPerLoop, float startOffset) : KinematicControl(body)

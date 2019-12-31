@@ -1,5 +1,3 @@
-
-
 #include "JellyHelper.h"
 
 JellyHellper* JellyHellper::_helper = 0;
@@ -49,11 +47,12 @@ void JellyHellper::UpdateLines(VertexArrayObject* vertexArray, std::vector<Point
 	}
 	else
 	{
-		_simpleData = new SimpleVertex[vertsCount];
+		//_simpleData = new SimpleVertex[vertsCount];
+        _simpleData = static_cast<SimpleVertex*>(vertexArray->GetVertices());
 	}
 
 	//update verts
-	for (unsigned int i = 0; i < pointMasses.size(); i++)
+	for (unsigned int i = 0; i < vertsCount; i++)
 	{
 		_simpleData[i].x = pointMasses[i].Position.X;
 		_simpleData[i].y = pointMasses[i].Position.Y;
@@ -88,11 +87,11 @@ void JellyHellper::UpdateLines(VertexArrayObject* vertexArray, std::vector<Point
 	//update or create
 	if (create)
 	{
-		vertexArray->Generate();
+		vertexArray->Generate(false);
 	}
 	else
 	{
-		vertexArray->UpdateVertices(_simpleData, vertsCount);
+		vertexArray->UpdateVertices(_simpleData, vertsCount, false);
 	}
 }
 
@@ -127,11 +126,12 @@ void JellyHellper::UpdateSpringShape(VertexArrayObject* vertexArray, std::vector
 	}
 	else
 	{
-		_simpleData = new SimpleVertex[vertsCount];
+		//_simpleData = new SimpleVertex[vertsCount];
+        _simpleData = static_cast<SimpleVertex*>(vertexArray->GetVertices());
 	}
 
 	//update verts
-	for (unsigned int i = 0; i < pointMasses.size(); i++)
+	for (unsigned int i = 0; i < vertsCount; i++)
 	{
 		_simpleData[i].x = pointMasses[i].Position.X;
 		_simpleData[i].y = pointMasses[i].Position.Y;
@@ -150,11 +150,11 @@ void JellyHellper::UpdateSpringShape(VertexArrayObject* vertexArray, std::vector
 	//update or create
 	if (create)
 	{
-		vertexArray->Generate();
+		vertexArray->Generate(false);
 	}
 	else
 	{
-		vertexArray->UpdateVertices(_simpleData, vertsCount);
+		vertexArray->UpdateVertices(_simpleData, vertsCount, false);
 	}
 }
 
@@ -176,11 +176,12 @@ void JellyHellper::UpdateBlobShape(VertexArrayObject* vertexArray, std::vector<V
 	}
 	else
 	{
-		_simpleData = new SimpleVertex[vertsCount];
+		//_simpleData = new SimpleVertex[vertsCount];
+        _simpleData = static_cast<SimpleVertex*>(vertexArray->GetVertices());
 	}
 
 	//update verts
-	for (unsigned int i = 0; i < points.size(); i++)
+	for (unsigned int i = 0; i < vertsCount; i++)
 	{
 		_simpleData[i].x = points[i].X;
 		_simpleData[i].y = points[i].Y;
@@ -199,11 +200,11 @@ void JellyHellper::UpdateBlobShape(VertexArrayObject* vertexArray, std::vector<V
 	//update or create
 	if (create)
 	{
-		vertexArray->Generate();
+		vertexArray->Generate(false);
 	}
 	else
 	{
-		vertexArray->UpdateVertices(_simpleData, vertsCount);
+		vertexArray->UpdateVertices(_simpleData, vertsCount, false);
 	}
 }
 
@@ -259,11 +260,12 @@ void JellyHellper::UpdateTextured(VertexArrayObject* vertexArray, std::vector<Po
 	}
 	else
 	{
-		_simpleData = new TextureVertex[vertsCount];
+		//_simpleData = new TextureVertex[vertsCount];
+        _simpleData = static_cast<TextureVertex*>(vertexArray->GetVertices());
 	}
 
 	//update verts
-	for (unsigned int i = 0; i < pointMasses.size(); i++)
+	for (unsigned int i = 0; i < vertsCount; i++)
 	{
 		_simpleData[i].x = pointMasses[i].Position.X;
 		_simpleData[i].y = pointMasses[i].Position.Y;
@@ -286,11 +288,11 @@ void JellyHellper::UpdateTextured(VertexArrayObject* vertexArray, std::vector<Po
 	//update or create
 	if (create)
 	{
-		vertexArray->Generate();
+		vertexArray->Generate(false);
 	}
 	else
 	{
-		vertexArray->UpdateVertices(_simpleData, vertsCount);
+		vertexArray->UpdateVertices(_simpleData, vertsCount, false);
 	}
 }
 
@@ -312,11 +314,12 @@ void JellyHellper::UpdateTexturedBlob(VertexArrayObject* vertexArray, std::vecto
 	}
 	else
 	{
-		_simpleData = new TextureVertex[vertsCount];
+		//_simpleData = new TextureVertex[vertsCount];
+		_simpleData = static_cast<TextureVertex*>(vertexArray->GetVertices());
 	}
 
 	//update verts
-	for (unsigned int i = 0; i < points.size(); i++)
+	for (unsigned int i = 0; i < vertsCount; i++)
 	{
 		_simpleData[i].x = points[i].X;
 		_simpleData[i].y = points[i].Y;
@@ -338,11 +341,11 @@ void JellyHellper::UpdateTexturedBlob(VertexArrayObject* vertexArray, std::vecto
 	//update or create
 	if (create)
 	{
-		vertexArray->Generate();
+		vertexArray->Generate(false);
 	}
 	else
 	{
-		vertexArray->UpdateVertices(_simpleData, vertsCount);
+		vertexArray->UpdateVertices(_simpleData, vertsCount, false);
 	}
 }
 

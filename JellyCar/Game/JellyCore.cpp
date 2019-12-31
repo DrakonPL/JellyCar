@@ -1,5 +1,3 @@
-
-
 #include "JellyCore.h"
 
 #include <Andromeda/Graphics/RenderManager.h>

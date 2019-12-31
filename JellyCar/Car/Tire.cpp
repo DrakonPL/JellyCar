@@ -1,5 +1,3 @@
-
-
 #include "Tire.h"
 #include "../Utils/JellyHelper.h"
 

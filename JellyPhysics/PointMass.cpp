@@ -1,5 +1,4 @@
 #include "PointMass.h"
-
 #include <stdio.h>
 
 namespace  JellyPhysics 

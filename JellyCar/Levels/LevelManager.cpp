@@ -1,5 +1,3 @@
-
-
 #include "LevelManager.h"
 #include "ObjectInfo.h"
 #include "KinematicMotor.h"
@@ -427,6 +425,17 @@ bool LevelManager::LoadCompiledLevel(World *world, std::string levelName, std::s
 		// finalize this one!
 		gameBody->Finalize();
 	}
+
+    //remove loaded data
+    delete[] objectsArray;
+
+    //delete body objects
+    for (size_t i = 0; i < bodyObjects.size(); i++)
+    {
+        delete[] bodyObjects[i].bodyPoints;
+        delete[] bodyObjects[i].bodyPolygons;
+        delete[] bodyObjects[i].bodySprings;
+    }
 
 	//car info
 	char carName[64];

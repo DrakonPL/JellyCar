@@ -1,5 +1,3 @@
-
-
 #include "KinematicMotor.h"
 
 KinematicMotor::KinematicMotor(Body* body, float radPerSec) : KinematicControl(body)

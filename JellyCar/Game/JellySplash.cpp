@@ -1,5 +1,3 @@
-
-
 #include "JellySplash.h"
 #include "JellyIntro.h"
 

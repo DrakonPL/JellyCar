@@ -4,6 +4,38 @@
 
 using namespace Andromeda::System;
 
+
+#include <iostream>
+#include <cstdlib>
+
+// Overloading Global new operator
+//void* operator new(size_t sz)
+//{
+//    void* m = malloc(sz);
+//    std::cout << "User Defined :: Operator new" << std::endl;
+//
+//    return m;
+//}
+//// Overloading Global delete operator
+//void operator delete(void* m)
+//{
+//    std::cout << "User Defined :: Operator delete" << std::endl;
+//    free(m);
+//}
+// Overloading Global new[] operator
+//void* operator new[](size_t sz)
+//{
+//    std::cout << "User Defined :: Operator new []" << std::endl;
+//    void* m = malloc(sz);
+//    return m;
+//}
+//// Overloading Global delete[] operator
+//void operator delete[](void* m)
+//{
+//    std::cout << "User Defined :: Operator delete[]" << std::endl;
+//    free(m);
+//}
+
 int main(int argc, char *argv[])
 {
 	JellyGameManager* jellyGame = new JellyGameManager();

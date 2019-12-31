@@ -1,5 +1,3 @@
-
-
 #include "AudioHelper.h"
 #include <stdlib.h>
 #include <time.h>
@@ -134,7 +132,7 @@ void AudioHelper::PlayMusic()
 
 		int soundNumber = rand() % 7;
 
-		Andromeda::Utils::Logger_Info("AudioHelper - PlayMusic: %s\n", _musicList[soundNumber].c_str());
+		//Andromeda::Utils::Logger_Info("AudioHelper - PlayMusic: %s\n", _musicList[soundNumber].c_str());
 
 		_music = _audioManager->GetSound(_musicList[soundNumber]);
 		_music->LoadOgg(_musicList[soundNumber]);

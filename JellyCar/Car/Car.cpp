@@ -1,5 +1,3 @@
-
-
 #include "Car.h"
 #include "tinyxml.h"
 

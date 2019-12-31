@@ -28,6 +28,7 @@
 #include "../Utils/InputHelper.h"
 #include "../Utils/AudioHelper.h"
 #include "JellyCore.h"
+#include "JellyGame.h"
 
 
 using namespace Andromeda::System;
@@ -100,7 +101,7 @@ private:
 	//level objects
 	std::vector<LevelSoftBody*> _gameBodies;
 
-
+    JellyGame* _jellyGame;
 
 public:
 

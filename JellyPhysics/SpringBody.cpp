@@ -1,5 +1,4 @@
 #include "SpringBody.h"
-
 #include "World.h"
 #include "VectorTools.h"
 

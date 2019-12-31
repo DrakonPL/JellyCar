@@ -1,5 +1,3 @@
-
-
 #include "GamePressureBody.h"
 #include "../Utils/JellyHelper.h"
 

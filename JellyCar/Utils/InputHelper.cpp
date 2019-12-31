@@ -1,5 +1,3 @@
-
-
 #include "InputHelper.h"
 #include <Andromeda/Utils/Logger.h>
 #include <Andromeda/FileSystem/FileManager.h>

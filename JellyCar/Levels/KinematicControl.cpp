@@ -1,5 +1,3 @@
-
-
 #include "KinematicControl.h"
 
 KinematicControl::KinematicControl(Body* body)

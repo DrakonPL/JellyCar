@@ -1,5 +1,4 @@
 #include "ClosedShape.h"
-
 #include "VectorTools.h"
 
 namespace JellyPhysics 

@@ -1,5 +1,3 @@
-
-
 #include "GameSpringBody.h"
 #include "../Utils/JellyHelper.h"
 
