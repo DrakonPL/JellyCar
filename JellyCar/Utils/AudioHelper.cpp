@@ -56,6 +56,7 @@ AudioHelper::~AudioHelper()
 
 	delete _carSlow;
 	delete _carFast;
+	delete _audioManager;
 }
 
 AudioHelper* AudioHelper::Instance()

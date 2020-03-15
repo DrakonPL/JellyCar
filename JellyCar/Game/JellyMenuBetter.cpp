@@ -352,32 +352,56 @@ void JellyMenuBetter::Draw(GameManager* manager)
 		_car->Draw(_jellyProjection);
 	}
 
-	_titleFont->AddText(_sceneFiles[currentPosition], _renderManager->GetWidth() / 2, 107, glm::vec3(0.19f, 0.14f, 0.17f), FontCenter);
-	_titleFont->AddText(_sceneFiles[currentPosition], _renderManager->GetWidth() / 2, 104, glm::vec3(1.0f, 0.65f, 0.0f), FontCenter);
+	//level text
+	int levelTextPositionY = (_renderManager->GetHeight() / 2) - _levelImage->GetTexture()->GetHeight() - 30;
+
+	_titleFont->AddText(_sceneFiles[currentPosition], _renderManager->GetWidth() / 2, levelTextPositionY + 3, glm::vec3(0.19f, 0.14f, 0.17f), FontCenter);
+	_titleFont->AddText(_sceneFiles[currentPosition], _renderManager->GetWidth() / 2, levelTextPositionY, glm::vec3(1.0f, 0.65f, 0.0f), FontCenter);
 
 	//time
 	char bufferTime[10];
 	sprintf(bufferTime, "%.2f", _levelManager->GetTime(_sceneFiles[currentPosition]));
-	_menuFont->AddText(std::string(bufferTime) + "s", 345, 327, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
-	_menuFont->AddText(std::string(bufferTime) + "s", 345, 325, glm::vec3(0.0f, 0.84f, 0.0f), FontLeft);
+
+	int timePositionX = (_renderManager->GetWidth() / 2) - (_levelImage->GetTexture()->GetWidth() / 2);
+	int jumpPositionX = (_renderManager->GetWidth() / 2) + (_levelImage->GetTexture()->GetWidth() / 2);
+
+	int textPosY = (_renderManager->GetHeight() / 2) + 30;
+
+	//_menuFont->AddText(std::string(bufferTime) + "s", 345, 327, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
+	//_menuFont->AddText(std::string(bufferTime) + "s", 345, 325, glm::vec3(0.0f, 0.84f, 0.0f), FontLeft);
+
+	_menuFont->AddText(std::string(bufferTime) + "s", timePositionX, textPosY + 2, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
+	_menuFont->AddText(std::string(bufferTime) + "s", timePositionX, textPosY, glm::vec3(0.0f, 0.84f, 0.0f), FontLeft);
 
 	//jump
 	char bufferJump[10];
 	sprintf(bufferJump, "%.2f", _levelManager->GetJump(_sceneFiles[currentPosition]));
-	_menuFont->AddText(std::string(bufferJump) + "m", 615, 327, glm::vec3(0.19f, 0.14f, 0.17f), FontRight);
-	_menuFont->AddText(std::string(bufferJump) + "m", 615, 325, glm::vec3(0.71f, 0.16f, 0.18f), FontRight);
+	//_menuFont->AddText(std::string(bufferJump) + "m", 615, 327, glm::vec3(0.19f, 0.14f, 0.17f), FontRight);
+	//_menuFont->AddText(std::string(bufferJump) + "m", 615, 325, glm::vec3(0.71f, 0.16f, 0.18f), FontRight);
 
-	//exit
-	_inputHelper->ActionSprite(InputAction::Exit)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2) - 40, 515));
+    _menuFont->AddText(std::string(bufferJump) + "m", jumpPositionX, textPosY+2, glm::vec3(0.19f, 0.14f, 0.17f), FontRight);
+	_menuFont->AddText(std::string(bufferJump) + "m", jumpPositionX, textPosY, glm::vec3(0.71f, 0.16f, 0.18f), FontRight);
+
+	//exit sprite
+	//_inputHelper->ActionSprite(InputAction::Exit)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2) - 40, 515));
+	_inputHelper->ActionSprite(InputAction::Exit)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2) - 40, _renderManager->GetHeight() - 29));
 	_inputHelper->ActionSprite(InputAction::Exit)->Draw(_projection);
-	_menuFont->AddText("Exit", (_renderManager->GetWidth() / 2) - 90, 525, glm::vec3(0.19f, 0.14f, 0.17f), FontRight);
 
-	//info about controls
-	_inputHelper->ActionSprite(InputAction::Pause)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2) + 40, 515));
+	//exit text
+	//_menuFont->AddText("Exit", (_renderManager->GetWidth() / 2) - 90, 525, glm::vec3(0.19f, 0.14f, 0.17f), FontRight);
+	_menuFont->AddText("Exit", (_renderManager->GetWidth() / 2) - 90, _renderManager->GetHeight() - 19, glm::vec3(0.19f, 0.14f, 0.17f), FontRight);
+
+	//options sprite
+	//_inputHelper->ActionSprite(InputAction::Pause)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2) + 40, 515));
+	_inputHelper->ActionSprite(InputAction::Pause)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2) + 40, _renderManager->GetHeight() - 29));
 	_inputHelper->ActionSprite(InputAction::Pause)->Draw(_projection);
-	_menuFont->AddText("Options", (_renderManager->GetWidth() / 2) + 90, 525, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
+
+	//options text
+	//vita // _menuFont->AddText("Options", (_renderManager->GetWidth() / 2) + 90, 525, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
+	_menuFont->AddText("Options", (_renderManager->GetWidth() / 2) + 90, _renderManager->GetHeight() - 19, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
 
 	//level image
+	_levelImage->SetPosition(glm::vec2(_renderManager->GetWidth() / 2, (_renderManager->GetHeight() / 2) - (_levelImage->GetTexture()->GetHeight() / 2)));
 	_levelImage->Draw(_projection);
 
 	//draw main text

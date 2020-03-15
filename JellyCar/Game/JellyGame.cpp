@@ -4,7 +4,7 @@
 
 #include <stdio.h> 
 #include <sstream> 
-#include "JellyOptions.h"
+
 
 template <typename T>
 std::string to_string(const T& value)
@@ -45,6 +45,8 @@ JellyGame::JellyGame(JellyCore* core)
 
 	_levelManager = NULL;
 	_menuLevelManager = NULL;
+
+    _jellyOptions = nullptr;
 
 	initialized = false;
 }
@@ -381,6 +383,9 @@ void JellyGame::Pause()
 
 void JellyGame::Resume()
 {
+    if (_jellyOptions != nullptr)
+        delete _jellyOptions;
+
 	_inputHelper->Update();
 }
 
@@ -566,16 +571,15 @@ void JellyGame::HandleEvents(GameManager* manager)
 			}
 		}
 
-		if (_inputHelper->ActionPressed(InputAction::Exit))
+		if (_inputHelper->ActionPressed(InputAction::Pause))
 		{
-			JellyOptions* jelly = new JellyOptions(_core);
-			//jelly->Init();
+            _jellyOptions = new JellyOptions(_core);
 
-			manager->PushState(jelly);
+			manager->PushState(_jellyOptions);
 			return;
 		}
 
-		if (_inputHelper->ActionPressed(InputAction::Pause))
+		if (_inputHelper->ActionPressed(InputAction::Exit))
 		{
 			_levelManager->ClearLevel(mWorld);
 			manager->PopState();
@@ -1001,52 +1005,42 @@ void JellyGame::Draw(GameManager* manager)
 	{
 		if (_checkpoint)
 		{
-			_menuFont->AddText("Pause", _renderManager->GetWidth() / 2, 200 + 2, glm::vec3(0.19f, 0.14f, 0.17f), FontCenter);
-			_menuFont->AddText("Pause", _renderManager->GetWidth() / 2, 200, glm::vec3(0.71f, 0.16f, 0.18f), FontCenter);
+			_menuFont->AddText("Pause", _renderManager->GetWidth() / 2, _renderManager->GetHeight() / 2  - 72+ 2, glm::vec3(0.19f, 0.14f, 0.17f), FontCenter);
+			_menuFont->AddText("Pause", _renderManager->GetWidth() / 2, _renderManager->GetHeight() / 2 - 72, glm::vec3(0.71f, 0.16f, 0.18f), FontCenter);
 			
-			_inputHelper->ActionSprite(InputAction::Back)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2), 230));
+			_inputHelper->ActionSprite(InputAction::Back)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2), _renderManager->GetHeight() / 2  - 42));
 			_inputHelper->ActionSprite(InputAction::Back)->Draw(_projection);
-			_menuFont->AddText("Resume", (_renderManager->GetWidth() / 2) + 50, 240, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
 
-			_inputHelper->ActionSprite(InputAction::Tire)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2), 270));
+			_menuFont->AddText("Resume", (_renderManager->GetWidth() / 2) + 50, _renderManager->GetHeight() / 2 - 32, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
+
+			_inputHelper->ActionSprite(InputAction::Tire)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2), _renderManager->GetHeight() / 2 - 2));
 			_inputHelper->ActionSprite(InputAction::Tire)->Draw(_projection);
-			_menuFont->AddText("Go to checkpoint", (_renderManager->GetWidth() / 2) + 50, 280, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
+
+			_menuFont->AddText("Go to checkpoint", (_renderManager->GetWidth() / 2) + 50, _renderManager->GetHeight() / 2 + 8, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
 		}
 		else
 		{
 			_menuFont->AddText("Pause", _renderManager->GetWidth() / 2, (_renderManager->GetHeight() / 2) - 40 + 2, glm::vec3(0.19f, 0.14f, 0.17f), FontCenter);
 			_menuFont->AddText("Pause", _renderManager->GetWidth() / 2, (_renderManager->GetHeight() / 2) - 40, glm::vec3(0.71f, 0.16f, 0.18f), FontCenter);
 
-			_inputHelper->ActionSprite(InputAction::Back)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2), 270));
+			_inputHelper->ActionSprite(InputAction::Back)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2), (_renderManager->GetHeight() / 2) - 2));
 			_inputHelper->ActionSprite(InputAction::Back)->Draw(_projection);
-			_menuFont->AddText("Resume", (_renderManager->GetWidth() / 2) + 50, 280, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
+
+			_menuFont->AddText("Resume", (_renderManager->GetWidth() / 2) + 50, (_renderManager->GetHeight() / 2) + 8, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
 		}
 
-		_inputHelper->ActionSprite(InputAction::Exit)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2), 310));
-		_inputHelper->ActionSprite(InputAction::Exit)->Draw(_projection);
-		_menuFont->AddText("Options", (_renderManager->GetWidth() / 2) + 50, 320, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
-
-		_inputHelper->ActionSprite(InputAction::Pause)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2), 350));
+		_inputHelper->ActionSprite(InputAction::Pause)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2), _renderManager->GetHeight() / 2 + 38));
 		_inputHelper->ActionSprite(InputAction::Pause)->Draw(_projection);
-		_menuFont->AddText("Main menu", (_renderManager->GetWidth() / 2) + 50, 360, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
+
+		_menuFont->AddText("Options", (_renderManager->GetWidth() / 2) + 50, _renderManager->GetHeight() / 2 + 48, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
+
+		_inputHelper->ActionSprite(InputAction::Exit)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2), _renderManager->GetHeight() / 2 + 78));
+		_inputHelper->ActionSprite(InputAction::Exit)->Draw(_projection);
+
+		_menuFont->AddText("Main menu", (_renderManager->GetWidth() / 2) + 50, _renderManager->GetHeight() / 2 + 88, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
 	}
 
-	//end level text
-	if (_gamePlayState != GamePlayState::Play && _gamePlayState != GamePlayState::Paused)
-	{
-		if (_newJumpRecord && _newTimeRecord)
-		{
-			_inputHelper->ActionSprite(InputAction::Back)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2), 310));
-			_inputHelper->ActionSprite(InputAction::Back)->Draw(_projection);
-			_menuFont->AddText("Main menu", (_renderManager->GetWidth() / 2) + 50, 320, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
-		}
-		else
-		{
-			_inputHelper->ActionSprite(InputAction::Back)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2), 270));
-			_inputHelper->ActionSprite(InputAction::Back)->Draw(_projection);
-			_menuFont->AddText("Main menu", (_renderManager->GetWidth() / 2) + 50, 280, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
-		}		
-	}
+
 
 	if (_gamePlayState == GamePlayState::Finish)
 	{
@@ -1083,6 +1077,23 @@ void JellyGame::Draw(GameManager* manager)
 		_menuFont->AddText("Out of level", _renderManager->GetWidth() / 2, (_renderManager->GetHeight() / 2) - 60 + 2, glm::vec3(0.19f, 0.14f, 0.17f), FontCenter);
 		_menuFont->AddText("Out of level", _renderManager->GetWidth() / 2, (_renderManager->GetHeight() / 2) - 60, glm::vec3(1.0f, 0.65f, 0.0f), FontCenter);
 
+	}
+
+	//end level text
+	if (_gamePlayState != GamePlayState::Play && _gamePlayState != GamePlayState::Paused)
+	{
+		if (_newJumpRecord && _newTimeRecord)
+		{
+			_inputHelper->ActionSprite(InputAction::Back)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2), _renderManager->GetHeight() / 2 + 38));
+			_inputHelper->ActionSprite(InputAction::Back)->Draw(_projection);
+			_menuFont->AddText("Main menu", (_renderManager->GetWidth() / 2) + 50, _renderManager->GetHeight() / 2 + 48, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
+		}
+		else
+		{
+			_inputHelper->ActionSprite(InputAction::Back)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2), _renderManager->GetHeight() / 2 - 2));
+			_inputHelper->ActionSprite(InputAction::Back)->Draw(_projection);
+			_menuFont->AddText("Main menu", (_renderManager->GetWidth() / 2) + 50, _renderManager->GetHeight() / 2 + 8, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
+		}
 	}
 
 	//draw main text

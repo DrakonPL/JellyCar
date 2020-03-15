@@ -33,7 +33,8 @@ enum InputActionMode
 {
 	PC,
 	PCGamepad,
-	VITA
+	VITA,
+	SWITCH
 };
 
 class InputHelper

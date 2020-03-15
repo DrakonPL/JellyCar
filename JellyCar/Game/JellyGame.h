@@ -23,6 +23,9 @@
 
 #include "../Utils/InputHelper.h"
 #include "../Utils/AudioHelper.h"
+
+#include "JellyOptions.h"
+
 #include "JellyCore.h"
 
 
@@ -97,6 +100,7 @@ private:
 	bool _fastCar;
 	bool _slowCar;
 
+
 	//level data
 	LevelManager* _levelManager;
 	LevelManager* _menuLevelManager;
@@ -161,6 +165,8 @@ private:
 	float _tireTime;
 
 	bool initialized;
+
+    JellyOptions* _jellyOptions;
 	
 private:
 

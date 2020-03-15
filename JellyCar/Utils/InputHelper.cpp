@@ -37,8 +37,8 @@ void InputHelper::PrepareKeyboardMapping()
 
 void InputHelper::PrepareGamepadMapping()
 {
-	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Accept, Gamepad::Button::Cross));
-	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Back, Gamepad::Button::Circle));
+	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Accept, Gamepad::Button::Circle));
+	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Back, Gamepad::Button::Cross));
 
 	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Transform, Gamepad::Button::Cross));
 	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Ballon, Gamepad::Button::Circle));
@@ -53,8 +53,8 @@ void InputHelper::PrepareGamepadMapping()
 	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::RotateLeft, Gamepad::Button::LTrigger));
 	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::RotateRight, Gamepad::Button::RTrigger));
 
-	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Pause, Gamepad::Button::Start));
-	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Exit, Gamepad::Button::Select));
+	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Pause, Gamepad::Button::Select));
+	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Exit, Gamepad::Button::Start));
 
 	for (int key = 0; key < Gamepad::Button::Count; key++)
 	{
@@ -94,22 +94,22 @@ void InputHelper::PrepareSpriteGamepadMapping()
 	_spriteShader = ShaderManager::Instance()->LoadFromFile("sprite", "Assets/Shaders/sprite", "Assets/Shaders/sprite", Textured);
 
 	//shapes
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Triangle, new Sprite("_control1", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(17.0f, 5.0f), glm::vec2(78.0f, 78.0f)) ));
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Circle, new Sprite("_control2", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(102.0f, 5.0f), glm::vec2(78.0f, 78.0f)) ));
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Cross, new Sprite("_control3", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(186.0f, 5.0f), glm::vec2(78.0f, 78.0f)) ));
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Square, new Sprite("_control4", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(273.0f, 5.0f), glm::vec2(78.0f, 78.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Triangle, new Sprite("_control1", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(17.0f, 5.0f), glm::vec2(78.0f, 78.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Circle, new Sprite("_control2", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(102.0f, 5.0f), glm::vec2(78.0f, 78.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Cross, new Sprite("_control3", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(186.0f, 5.0f), glm::vec2(78.0f, 78.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Square, new Sprite("_control4", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(273.0f, 5.0f), glm::vec2(78.0f, 78.0f)) ));
 
 	//left,right...
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Left, new Sprite("_control5", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(313.0f, 88.0f), glm::vec2(88.0f, 68.0f)) ));
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Right, new Sprite("_control6", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(413, 82.0f), glm::vec2(88.0f, 68.0f)) ));
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Up, new Sprite("_control7", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(159.0f, 94.0f), glm::vec2(68.0f, 88.0f)) ));
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Down, new Sprite("_control8", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(239.0f, 94.0f), glm::vec2(68.0f, 88.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Left, new Sprite("_control5", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(313.0f, 88.0f), glm::vec2(88.0f, 68.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Right, new Sprite("_control6", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(413, 82.0f), glm::vec2(88.0f, 68.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Up, new Sprite("_control7", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(159.0f, 94.0f), glm::vec2(68.0f, 88.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Down, new Sprite("_control8", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(239.0f, 94.0f), glm::vec2(68.0f, 88.0f)) ));
 
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::LTrigger, new Sprite("_control9", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(6.0f, 87.0f), glm::vec2(128.0f, 60.0f)) ));
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::RTrigger, new Sprite("_control10", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(369.0f, 11.0f), glm::vec2(128.0f, 60.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::LTrigger, new Sprite("_control9", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(6.0f, 87.0f), glm::vec2(128.0f, 60.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::RTrigger, new Sprite("_control10", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(369.0f, 11.0f), glm::vec2(128.0f, 60.0f)) ));
 
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Select, new Sprite("_control11", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(303.0f, 180.0f), glm::vec2(74.0f, 38.0f)) ));
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Start, new Sprite("_control12", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(431.0f, 180.0f), glm::vec2(74.0f, 38.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Select, new Sprite("_control11", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(303.0f, 180.0f), glm::vec2(74.0f, 38.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Start, new Sprite("_control12", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(431.0f, 180.0f), glm::vec2(74.0f, 38.0f)) ));
 
 	_spriteGamepadMapping[Gamepad::Button::Triangle]->SetScale(glm::vec2(0.4f, 0.4f));
 	_spriteGamepadMapping[Gamepad::Button::Circle]->SetScale(glm::vec2(0.4f, 0.4f));
@@ -130,22 +130,22 @@ void InputHelper::PrepareSpriteKeyboardMapping()
 	_spriteShader = ShaderManager::Instance()->LoadFromFile("sprite", "Assets/Shaders/sprite", "Assets/Shaders/sprite", Textured);
 
 	//shapes
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::W, new Sprite("_control1", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(17.0f, 5.0f), glm::vec2(78.0f, 78.0f))));
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::D, new Sprite("_control2", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(102.0f, 5.0f), glm::vec2(78.0f, 78.0f))));
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::S, new Sprite("_control3", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(186.0f, 5.0f), glm::vec2(78.0f, 78.0f))));
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::A, new Sprite("_control4", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(273.0f, 5.0f), glm::vec2(78.0f, 78.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::W, new Sprite("_control1", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(17.0f, 5.0f), glm::vec2(78.0f, 78.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::D, new Sprite("_control2", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(102.0f, 5.0f), glm::vec2(78.0f, 78.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::S, new Sprite("_control3", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(186.0f, 5.0f), glm::vec2(78.0f, 78.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::A, new Sprite("_control4", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(273.0f, 5.0f), glm::vec2(78.0f, 78.0f))));
 
 	//left,right...
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Left, new Sprite("_control5", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(313.0f, 88.0f), glm::vec2(88.0f, 68.0f))));
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Right, new Sprite("_control6", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(413, 82.0f), glm::vec2(88.0f, 68.0f))));
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Up, new Sprite("_control7", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(159.0f, 94.0f), glm::vec2(68.0f, 88.0f))));
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Down, new Sprite("_control8", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(239.0f, 94.0f), glm::vec2(68.0f, 88.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Left, new Sprite("_control5", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(313.0f, 88.0f), glm::vec2(88.0f, 68.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Right, new Sprite("_control6", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(413, 82.0f), glm::vec2(88.0f, 68.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Up, new Sprite("_control7", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(159.0f, 94.0f), glm::vec2(68.0f, 88.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Down, new Sprite("_control8", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(239.0f, 94.0f), glm::vec2(68.0f, 88.0f))));
 
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Q, new Sprite("_control9", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(6.0f, 87.0f), glm::vec2(128.0f, 60.0f))));
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::E, new Sprite("_control10", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(369.0f, 11.0f), glm::vec2(128.0f, 60.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Q, new Sprite("_control9", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(6.0f, 87.0f), glm::vec2(128.0f, 60.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::E, new Sprite("_control10", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(369.0f, 11.0f), glm::vec2(128.0f, 60.0f))));
 
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Space, new Sprite("_control11", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(303.0f, 180.0f), glm::vec2(74.0f, 38.0f))));
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Return, new Sprite("_control12", TextureManager::Instance()->LoadFromFile("Assets/Images/vita_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(431.0f, 180.0f), glm::vec2(74.0f, 38.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Space, new Sprite("_control11", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(303.0f, 180.0f), glm::vec2(74.0f, 38.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Return, new Sprite("_control12", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(431.0f, 180.0f), glm::vec2(74.0f, 38.0f))));
 
 	_spriteKeyboardMapping[Key::Code::Left]->SetScale(glm::vec2(0.4f, 0.4f));
 	_spriteKeyboardMapping[Key::Code::Right]->SetScale(glm::vec2(0.4f, 0.4f));
@@ -180,7 +180,14 @@ InputHelper::InputHelper()
 	else
 	{
 		_gamepad = _inputManager->GetGamepadDevice(0);
+
+#ifdef ANDROMEDA_SWITCH
+		_mode = InputActionMode::SWITCH;
+#endif
+
+#ifdef ANDROMEDA_VITA
 		_mode = InputActionMode::VITA;
+#endif		
 	}
 
 	for (size_t i = 0; i < InputAction::Count; i++)
@@ -323,10 +330,20 @@ glm::vec2 InputHelper::GetTouchPosition(int touch)
 	}
 	else
 	{
-		float x = ((float)_touchDevice->GetTouchX(touch) / 1920.0f) * RenderManager::Instance()->GetWidth();
-		float y = ((float)_touchDevice->GetTouchY(touch) / 1088.0f) * RenderManager::Instance()->GetHeight();
+        if (_mode == InputActionMode::SWITCH)
+        {
+			return glm::vec2(_touchDevice->GetTouchX(touch), _touchDevice->GetTouchY(touch));
+        }
 
-		return glm::vec2(x, y);
+		if (_mode == InputActionMode::VITA)
+		{
+			float x = ((float)_touchDevice->GetTouchX(touch) / 1920.0f) * RenderManager::Instance()->GetWidth();
+			float y = ((float)_touchDevice->GetTouchY(touch) / 1088.0f) * RenderManager::Instance()->GetHeight();
+
+			return glm::vec2(x, y);
+		}
+
+		return glm::vec2(0, 0);
 	}
 }
 

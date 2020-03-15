@@ -144,29 +144,33 @@ void JellyOptions::InitCredits()
 	_credits.push_back(Text("Ruben Wolfe, SMOKE, TheFloW", 202));
 	_credits.push_back(Text("for support and testing", 242));
 	_credits.push_back(Text("Rinnegatamante and EasyRPG Team", 302));
-	_credits.push_back(Text("for the Audio Decoder used for Sound module", 342));
+	_credits.push_back(Text("for the Audio Decoder used for Vita sound module", 342));
 	_credits.push_back(Text("St3f  for splash screen", 402));
 	_credits.push_back(Text("Team Molecule for HENkaku", 462));
-	_credits.push_back(Text("Everybody who contributed on vitasdk", 522));
+	_credits.push_back(Text("Everybody who contributed to vitasdk", 522));
+	_credits.push_back(Text("Switchbrew team", 582));
+	_credits.push_back(Text("Everybody who contributed to libnx", 642));
 }
 
 void JellyOptions::InitLibs()
 {
-	_libs.push_back(Text("Libs used for PC/Vita", 0));
+	_libs.push_back(Text("Libs used for PC/Vita/Switch", 0));
 	_libs.push_back(Text("freetype", 82));
 	_libs.push_back(Text("freetype_gl", 142));
-	_libs.push_back(Text("glew", 202));
-	_libs.push_back(Text("glfw", 262));
-	_libs.push_back(Text("glm", 322));
-	_libs.push_back(Text("irrKlang", 382));
-	_libs.push_back(Text("JellyPhysics", 442));
-	_libs.push_back(Text("ogg", 502));
-	_libs.push_back(Text("stb", 562));
-	_libs.push_back(Text("speexdsp", 622));
-	_libs.push_back(Text("tinyxml", 682));
-	_libs.push_back(Text("vorbisfile", 742));
-	_libs.push_back(Text("vorbisenc", 802));
-	_libs.push_back(Text("vorbis", 862));
+	_libs.push_back(Text("glad", 202));
+	_libs.push_back(Text("glew", 262));
+	_libs.push_back(Text("glfw", 322));
+	_libs.push_back(Text("glm", 382));
+	_libs.push_back(Text("irrKlang", 442));
+	_libs.push_back(Text("JellyPhysics", 502));
+	_libs.push_back(Text("ogg", 562));
+	_libs.push_back(Text("SDL2", 622));
+	_libs.push_back(Text("stb", 682));
+	_libs.push_back(Text("speexdsp", 742));
+	_libs.push_back(Text("tinyxml", 802));
+	_libs.push_back(Text("vorbisfile", 862));
+	_libs.push_back(Text("vorbisenc", 922));
+	_libs.push_back(Text("vorbis", 9802));
 }
 
 void JellyOptions::InitActionNames()
@@ -207,6 +211,8 @@ void JellyOptions::CleanUp()
 	delete _world;
 	_gameBodies.clear();
 
+    delete _timer;
+
 	delete _backSprite;
 	delete _backSelectSprite;
 	delete _backRoundSprite;
@@ -214,6 +220,10 @@ void JellyOptions::CleanUp()
 	delete _rightSprite;
 	delete _barSprite;
 	delete _barBlueSprite;
+
+    _credits.clear();
+    _libs.clear();
+    _actionNames.clear();
 }
 
 void JellyOptions::Pause()
@@ -307,13 +317,16 @@ void JellyOptions::HandleEvents(GameManager* manager)
 						if (_gameBodies[i]->GetName() == "options_libs")
 						{
 							_optionsState = JellyOptionsState::Libs;
-							_libsPosition = 510;
+							//_libsPosition = 510;
+							_libsPosition = _renderManager->GetHeight() - (_renderManager->GetHeight() * 0.08f);;
 						}
 
 						if (_gameBodies[i]->GetName() == "options_credits")
 						{
 							_optionsState = JellyOptionsState::Credits;
-							_creditsPosition = 510;
+
+							//set correct positiond down
+							_creditsPosition = _renderManager->GetHeight() - (_renderManager->GetHeight() * 0.08f);
 						}
 
 						if (_gameBodies[i]->GetName() == "options_keys")
@@ -341,13 +354,13 @@ void JellyOptions::HandleEvents(GameManager* manager)
 			if (_menuBodies[_menuBodySelected]->GetName() == "options_libs")
 			{
 				_optionsState = JellyOptionsState::Libs;
-				_libsPosition = 510;
+				_libsPosition = _renderManager->GetHeight() - (_renderManager->GetHeight() * 0.08f);
 			}
 
 			else if (_menuBodies[_menuBodySelected]->GetName() == "options_credits")
 			{
 				_optionsState = JellyOptionsState::Credits;
-				_creditsPosition = 510;
+				_creditsPosition = _renderManager->GetHeight() - (_renderManager->GetHeight() * 0.08f);
 			}
 
 			else if (_menuBodies[_menuBodySelected]->GetName() == "options_keys")
@@ -592,7 +605,7 @@ void JellyOptions::Update(GameManager* manager)
 		bool reset = true;
 		for (size_t i = 0; i < _credits.size(); i++)
 		{
-			if (_credits[i].StartPosition + _creditsPosition > 110)
+			if (_credits[i].StartPosition + _creditsPosition > (_renderManager->GetWidth() * 0.13f))
 			{
 				reset = false;
 			}
@@ -600,7 +613,7 @@ void JellyOptions::Update(GameManager* manager)
 
 		if (reset)
 		{
-			_creditsPosition = 510;
+			_creditsPosition = _renderManager->GetHeight() - (_renderManager->GetHeight() * 0.08f);;
 		}
 	}
 
@@ -611,7 +624,7 @@ void JellyOptions::Update(GameManager* manager)
 		bool reset = true;
 		for (size_t i = 0; i < _libs.size(); i++)
 		{
-			if (_libs[i].StartPosition + _libsPosition > 110)
+			if (_libs[i].StartPosition + _libsPosition > (_renderManager->GetWidth() * 0.13f))
 			{
 				reset = false;
 			}
@@ -619,7 +632,7 @@ void JellyOptions::Update(GameManager* manager)
 
 		if (reset)
 		{
-			_libsPosition = 510;
+			_libsPosition = _renderManager->GetHeight() - (_renderManager->GetHeight() * 0.08f);;
 		}
 	}
 
@@ -725,68 +738,130 @@ void JellyOptions::Draw(GameManager* manager)
 		break;
 		case JellyOptionsState::Sound:
 		{
+
+			int leftSpritePosX = _renderManager->GetWidth() / 2 - (260);
+			int rightSpritePosX = _renderManager->GetWidth() / 2 + (260);
+
+
+			int leftRightPosY = _renderManager->GetHeight() / 2 + (_renderManager->GetHeight() * 0.08f);
+
+
 			_titleFont->AddText("Sound Levels", centerX, 57, glm::vec3(0.19f, 0.14f, 0.17f), FontCenter);
 			_titleFont->AddText("Sound Levels", centerX, 54, glm::vec3(1.0f, 0.65f, 0.0f), FontCenter);
 
-			_menuFont->AddText("Car", 250, 115, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
-			_menuFont->AddText("Car", 250, 113, glm::vec3(1.0f, 0.65f, 0.0f), FontLeft);
+			_menuFont->AddText("Car", leftSpritePosX + 30, leftRightPosY + 2 - 140 - 55, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
+			_menuFont->AddText("Car", leftSpritePosX + 30, leftRightPosY - 140 - 55, glm::vec3(1.0f, 0.65f, 0.0f), FontLeft);
 
-			_menuFont->AddText("Sounds", 250, 255, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
-			_menuFont->AddText("Sounds", 250, 253, glm::vec3(1.0f, 0.65f, 0.0f), FontLeft);
+			_menuFont->AddText("Sounds", leftSpritePosX + 30, leftRightPosY + 2 - 55, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
+			_menuFont->AddText("Sounds", leftSpritePosX + 30, leftRightPosY - 55, glm::vec3(1.0f, 0.65f, 0.0f), FontLeft);
 
-			_menuFont->AddText("Music", 250, 395, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
-			_menuFont->AddText("Music", 250, 393, glm::vec3(1.0f, 0.65f, 0.0f), FontLeft);
+			_menuFont->AddText("Music", leftSpritePosX + 30, leftRightPosY + 2 + 140 - 55, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
+			_menuFont->AddText("Music", leftSpritePosX + 30, leftRightPosY + 140 - 55, glm::vec3(1.0f, 0.65f, 0.0f), FontLeft);
 
 			//rounded back
-			_backRoundSprite->SetSolor(glm::vec4(1.0f, 1.0f, 1.0f, _alphaScale));
-			_backRoundSprite->SetScale(glm::vec2(0.8f, 0.8f));
+			//_backRoundSprite->SetSolor(glm::vec4(1.0f, 1.0f, 1.0f, _alphaScale));
+			//_backRoundSprite->SetScale(glm::vec2(0.8f, 0.8f));
 
-			_backRoundSprite->SetPosition(glm::vec2(210, 170 + (_soundPosition * 140)));
-			_backRoundSprite->Draw(_projection);
+			//_backRoundSprite->SetPosition(glm::vec2(210, 170 + (_soundPosition * 140)));
+			//_backRoundSprite->Draw(_projection);
 
-			_backRoundSprite->SetPosition(glm::vec2(750, 170 + (_soundPosition * 140)));
-			_backRoundSprite->Draw(_projection);
+			//_backRoundSprite->SetPosition(glm::vec2(750, 170 + (_soundPosition * 140)));
+			//_backRoundSprite->Draw(_projection);
 
 			//left side
 			_leftSprite->SetScale(glm::vec2(0.8f, 0.8f));
 
-			_leftSprite->SetPosition(glm::vec2(210,170));
+
+            if (_soundPosition == 0)
+            {
+				_leftSprite->SetSolor(glm::vec4(1.0f, 1.0f, 1.0f, _alphaScale));
+            }else
+            {
+				_leftSprite->SetSolor(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+            }
+			_leftSprite->SetPosition(glm::vec2(leftSpritePosX, leftRightPosY - 140));
 			_leftSprite->Draw(_projection);
 
-			_leftSprite->SetPosition(glm::vec2(210, 310));
+			if (_soundPosition == 1)
+			{
+				_leftSprite->SetSolor(glm::vec4(1.0f, 1.0f, 1.0f, _alphaScale));
+			}
+			else
+			{
+				_leftSprite->SetSolor(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+			}
+			_leftSprite->SetPosition(glm::vec2(leftSpritePosX, leftRightPosY));
 			_leftSprite->Draw(_projection);
 
-			_leftSprite->SetPosition(glm::vec2(210, 450));
+
+			if (_soundPosition == 2)
+			{
+				_leftSprite->SetSolor(glm::vec4(1.0f, 1.0f, 1.0f, _alphaScale));
+			}
+			else
+			{
+				_leftSprite->SetSolor(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+			}
+			_leftSprite->SetPosition(glm::vec2(leftSpritePosX, leftRightPosY + 140));
 			_leftSprite->Draw(_projection);
 
 			//right side
 			_rightSprite->SetScale(glm::vec2(0.8f, 0.8f));
 
-			_rightSprite->SetPosition(glm::vec2(750, 170));
+			if (_soundPosition == 0)
+			{
+				_rightSprite->SetSolor(glm::vec4(1.0f, 1.0f, 1.0f, _alphaScale));
+			}
+			else
+			{
+				_rightSprite->SetSolor(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+			}
+			_rightSprite->SetPosition(glm::vec2(rightSpritePosX, leftRightPosY - 140));
 			_rightSprite->Draw(_projection);
 
-			_rightSprite->SetPosition(glm::vec2(750, 310));
+
+			if (_soundPosition == 1)
+			{
+				_rightSprite->SetSolor(glm::vec4(1.0f, 1.0f, 1.0f, _alphaScale));
+			}
+			else
+			{
+				_rightSprite->SetSolor(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+			}
+			_rightSprite->SetPosition(glm::vec2(rightSpritePosX, leftRightPosY));
 			_rightSprite->Draw(_projection);
 
-			_rightSprite->SetPosition(glm::vec2(750, 450));
+
+			if (_soundPosition == 2)
+			{
+				_rightSprite->SetSolor(glm::vec4(1.0f, 1.0f, 1.0f, _alphaScale));
+			}
+			else
+			{
+				_rightSprite->SetSolor(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+			}
+			_rightSprite->SetPosition(glm::vec2(rightSpritePosX, leftRightPosY + 140));
 			_rightSprite->Draw(_projection);
 
 			//sound bars
 			_barSprite->SetScale(glm::vec2(0.8f, 0.8f));
 			_barBlueSprite->SetScale(glm::vec2(0.8f, 0.8f));
 
-			int startBar = 300;
+
+			int startBar = _renderManager->GetWidth() / 2 - (180);
+
+			//int startBar = 300;
 
 			//car
 			for (int i = 0; i < 10;i++)
 			{
 				if (i < _optionsCarLevel)
 				{
-					_barSprite->SetPosition(glm::vec2(startBar + (i * 40), 170));
+					_barSprite->SetPosition(glm::vec2(startBar + (i * 40), leftRightPosY - 140));
 					_barSprite->Draw(_projection);
 				}else
 				{
-					_barBlueSprite->SetPosition(glm::vec2(startBar + (i * 40), 170));
+					_barBlueSprite->SetPosition(glm::vec2(startBar + (i * 40), leftRightPosY - 140));
 					_barBlueSprite->Draw(_projection);
 				}
 			}
@@ -796,11 +871,11 @@ void JellyOptions::Draw(GameManager* manager)
 			{
 				if (i < _optionsSoundLevel)
 				{
-					_barSprite->SetPosition(glm::vec2(startBar + (i * 40), 310));
+					_barSprite->SetPosition(glm::vec2(startBar + (i * 40), leftRightPosY ));
 					_barSprite->Draw(_projection);
 				}else
 				{
-					_barBlueSprite->SetPosition(glm::vec2(startBar + (i * 40), 310));
+					_barBlueSprite->SetPosition(glm::vec2(startBar + (i * 40), leftRightPosY ));
 					_barBlueSprite->Draw(_projection);
 				}
 			}
@@ -810,11 +885,11 @@ void JellyOptions::Draw(GameManager* manager)
 			{
 				if (i < _optionsMusicLevel)
 				{
-					_barSprite->SetPosition(glm::vec2(startBar + (i * 40), 450));
+					_barSprite->SetPosition(glm::vec2(startBar + (i * 40), leftRightPosY + 140));
 					_barSprite->Draw(_projection);
 				}else
 				{
-					_barBlueSprite->SetPosition(glm::vec2(startBar + (i * 40), 450));
+					_barBlueSprite->SetPosition(glm::vec2(startBar + (i * 40), leftRightPosY + 140));
 					_barBlueSprite->Draw(_projection);					
 				}
 			}
@@ -831,7 +906,7 @@ void JellyOptions::Draw(GameManager* manager)
 				_backSelectSprite->SetSolor(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 			}
 
-			int startPosition = 170;
+			int startPosition = _renderManager->GetHeight() / 2 - 100;
 			int step = 45;
 
 			//draw backgroud bar
@@ -915,7 +990,7 @@ void JellyOptions::Draw(GameManager* manager)
 
 			for (size_t i = 0; i < _credits.size(); i++)
 			{
-				if (_credits[i].StartPosition + _creditsPosition  > 110 && _credits[i].StartPosition + _creditsPosition < 510 )
+				if (_credits[i].StartPosition + _creditsPosition  > (_renderManager->GetWidth() * 0.13f) && _credits[i].StartPosition + _creditsPosition < (_renderManager->GetHeight() - (_renderManager->GetHeight() * 0.08f)))
 				{
 					_menuFont->AddText(_credits[i].Content, centerX, _credits[i].StartPosition + _creditsPosition, glm::vec3(0.19f, 0.14f, 0.17f), FontCenter);
 					_menuFont->AddText(_credits[i].Content, centerX, _credits[i].StartPosition - 2 + _creditsPosition, glm::vec3(1.0f, 0.65f, 0.0f), FontCenter);
@@ -931,7 +1006,7 @@ void JellyOptions::Draw(GameManager* manager)
 
 			for (size_t i = 0; i < _libs.size(); i++)
 			{
-				if (_libs[i].StartPosition + _libsPosition  > 110 && _libs[i].StartPosition + _libsPosition < 510)
+				if (_libs[i].StartPosition + _libsPosition  > (_renderManager->GetWidth() * 0.13f) && _libs[i].StartPosition + _libsPosition < (_renderManager->GetHeight() - (_renderManager->GetHeight() * 0.08f)))
 				{
 					_menuFont->AddText(_libs[i].Content, centerX, _libs[i].StartPosition + _libsPosition, glm::vec3(0.19f, 0.14f, 0.17f), FontCenter);
 					_menuFont->AddText(_libs[i].Content, centerX, _libs[i].StartPosition - 2 + _libsPosition, glm::vec3(1.0f, 0.65f, 0.0f), FontCenter);
@@ -947,9 +1022,13 @@ void JellyOptions::Draw(GameManager* manager)
 	}
 
 	//back to menu
-	_inputHelper->ActionSprite(InputAction::Back)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2), 528));
+	//_inputHelper->ActionSprite(InputAction::Back)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2), 528));
+	_inputHelper->ActionSprite(InputAction::Back)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2), _renderManager->GetHeight() - 20));
 	_inputHelper->ActionSprite(InputAction::Back)->Draw(_projection);
-	_menuFont->AddText("Back", (_renderManager->GetWidth() / 2) + 30, 538, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
+
+	//back text
+	//_menuFont->AddText("Back", (_renderManager->GetWidth() / 2) + 30, 538, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
+	_menuFont->AddText("Back", (_renderManager->GetWidth() / 2) + 30, _renderManager->GetHeight() - 6 , glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
 
 	//draw main text
 	_menuFont->Draw(_projection);

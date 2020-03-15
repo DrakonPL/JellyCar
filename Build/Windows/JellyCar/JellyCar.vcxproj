@@ -98,8 +98,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;freetype263.lib;irrKlang.lib;portaudio_x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../../../../Andromeda-Lib/Build/Windows/Debug;../../../../Andromeda-Lib/Libs/glew/lib;../../../../Andromeda-Lib/Libs/glfw/lib;../../../../Andromeda-Lib/Libs/freetype/lib;../../../../Andromeda-Lib/Libs/irrKlang/lib;../../../../Andromeda-Lib/Libs/ffmpeg/lib;../../../../Andromeda-Lib/Libs/portaudio/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;freetype263.lib;irrKlang.lib;portaudio_x86.lib;SDL2.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../../../Andromeda-Lib/Build/Windows/Debug;../../../../Andromeda-Lib/Libs/glew/lib;../../../../Andromeda-Lib/Libs/glfw/lib;../../../../Andromeda-Lib/Libs/freetype/lib;../../../../Andromeda-Lib/Libs/irrKlang/lib;../../../../Andromeda-Lib/Libs/ffmpeg/lib;../../../../Andromeda-Lib/Libs/portaudio/Debug;../../../../Andromeda-Lib/Libs/sdl/lib/x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

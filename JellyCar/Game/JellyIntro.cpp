@@ -102,6 +102,7 @@ void JellyIntro::CleanUp()
 	delete _inputHelper;
 	delete _core;
 	delete _logoSprite;
+	delete _audioHelper;
 
 	_shaderManager->RemoveAll();
 	_textureManager->RemoveAll();
