@@ -36,6 +36,8 @@ using namespace Andromeda::System;
 //    free(m);
 //}
 
+int _newlib_heap_size_user = 128 * 1024 * 1024;
+
 int main(int argc, char *argv[])
 {
 	JellyGameManager* jellyGame = new JellyGameManager();

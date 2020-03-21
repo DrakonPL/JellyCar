@@ -45,9 +45,9 @@ PREFIX  	= arm-vita-eabi
 CC      	= $(PREFIX)-gcc
 CXX      	= $(PREFIX)-g++
 STRIP 		= $(PREFIX)-strip
-CXXFLAGS  	= -Wl,-q -O3 -fpermissive -ffast-math -mtune=cortex-a9 -mfloat-abi=hard -mfpu=neon -std=gnu++11 -DANDROMEDA_VITA -DHAVE_OGGVORBIS -DWANT_FASTWAV -DHAVE_LIBSPEEXDSP -DUSE_AUDIO_RESAMPLER 
+CXXFLAGS  	= -Wl,-q -O3 -fpermissive -ffast-math -mtune=cortex-a9 -mfloat-abi=hard -mfpu=neon -std=gnu++11 -Wall -Werror=return-type -DANDROMEDA_VITA -DHAVE_OGGVORBIS -DWANT_FASTWAV -DHAVE_LIBSPEEXDSP -DUSE_AUDIO_RESAMPLER 
 CXXFLAGS	+= -I../../ -I../../../Andromeda-Lib -I../../../Libs -I../../../Andromeda-Lib/Libs/glm -I../../../Andromeda-Lib/Libs/freetype/include -I../../../Andromeda-Lib/Libs/freetype_gl -I../../JellyPhysics -I../../Libs/tinyxml -I../../../Andromeda-Lib/Libs/stb -I../../../Libs/nogg -I../../../Libs/tiny_obj_loader
-CFLAGS  	= -Wl,-q -O3 -std=c99 -ffast-math -mtune=cortex-a9 -mfloat-abi=hard -mfpu=neon -DANDROMEDA_VITA -DHAVE_OGGVORBIS -DWANT_FASTWAV  -DHAVE_LIBSPEEXDSP -DUSE_AUDIO_RESAMPLER 
+CFLAGS  	= -Wl,-q -O3 -std=c99 -ffast-math -mtune=cortex-a9 -mfloat-abi=hard -mfpu=neon -Wall -Werror=return-type -DANDROMEDA_VITA -DHAVE_OGGVORBIS -DWANT_FASTWAV  -DHAVE_LIBSPEEXDSP -DUSE_AUDIO_RESAMPLER 
 CFLAGS  	+= -I../../ -I../../../Andromeda-Lib -I../../../Libs -I../../../Andromeda-Lib/Libs/glm -I../../../Andromeda-Lib/Libs/freetype/include -I../../../Andromeda-Lib/Libs/freetype_gl -I../../JellyPhysics -I../../Libs/tinyxml -I../../../Andromeda-Lib/Libs/stb -I../../../Libs/nogg -I../../../Libs/tiny_obj_loader
 ASFLAGS 	= $(CFLAGS)
 

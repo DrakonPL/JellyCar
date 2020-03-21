@@ -135,7 +135,7 @@ private:
 	Sprite* _backSelectSprite;
 	int _selctedPosition;
 	bool _changeBinding;
-	InputAction _selectedAction;
+	CarAction _selectedAction;
 
 	//sound options
 	Sprite* _backRoundSprite;
@@ -154,7 +154,8 @@ private:
 	int _optionsMusicLevel;
 
 	//
-	std::vector<std::string> _actionNames;
+	std::vector<CarAction> _carActions;
+	std::map<CarAction, std::string> _actionTranslation;
 	
 	void InitCredits();
 	void InitLibs();

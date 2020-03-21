@@ -12,7 +12,24 @@ void JellySplash::Init()
 	//load shader
 	_shader = _shaderManager->LoadFromFile("sprite", "Assets/Shaders/sprite", "Assets/Shaders/sprite", Textured);
 
-	_image = _textureManager->LoadFromFile("Assets/Images/splash.png");
+
+	std::string splashFile = "Assets/Images/splash_switch.png";
+
+#ifdef ANDROMEDA_VITA
+
+	splashFile = "Assets/Images/splash_vita.png";
+
+#endif
+
+#ifdef ANDROMEDA_SWITCH
+
+	splashFile = "Assets/Images/splash_switch.png";
+
+#endif
+
+	_image = _textureManager->LoadFromFile(splashFile);
+
+
 
 	//sprite
 	_sprite = new Sprite("splash", _image, _shader);

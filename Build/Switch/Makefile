@@ -39,7 +39,7 @@ include $(DEVKITPRO)/libnx/switch_rules
 #---------------------------------------------------------------------------------
 APP_TITLE	:=	JellyCar
 APP_AUTHOR	:=	drakon
-APP_VERSION	:=	1.0.0
+APP_VERSION	:=	1.1.0
 
 TARGET		:=	JellyCar
 BUILD		:=	build

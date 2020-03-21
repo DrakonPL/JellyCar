@@ -158,13 +158,13 @@ void JellyMenuBetter::GameResume()
 
 void JellyMenuBetter::HandleEvents(GameManager* manager)
 {
-	if (_inputHelper->ActionPressed(InputAction::Exit))
+	if (_inputHelper->MenuActionPressed(MenuAction::MenuExit))
 	{
 		manager->Quit();
 		return;
 	}
 
-	if (_inputHelper->ActionPressed(InputAction::Pause))
+	if (_inputHelper->MenuActionPressed(MenuAction::MenuPause))
 	{
 		JellyOptions* jelly = new JellyOptions(_core);
 		//jelly->Init();
@@ -173,7 +173,7 @@ void JellyMenuBetter::HandleEvents(GameManager* manager)
 		return;
 	}
 
-	if (_inputHelper->ActionPressed(InputAction::Up))
+	if (_inputHelper->MenuActionPressed(MenuAction::MenuUp))
 	{
 		currentPosition--;
 
@@ -187,7 +187,7 @@ void JellyMenuBetter::HandleEvents(GameManager* manager)
 		_audioHelper->PlayHitSound();
 	}
 
-	if (_inputHelper->ActionPressed(InputAction::Down))
+	if (_inputHelper->MenuActionPressed(MenuAction::MenuDown))
 	{
 		currentPosition++;
 
@@ -201,7 +201,7 @@ void JellyMenuBetter::HandleEvents(GameManager* manager)
 		_audioHelper->PlayHitSound();
 	}
 
-	if (_inputHelper->ActionPressed(InputAction::Tire))
+	if (_inputHelper->ActionPressed(CarAction::Tire))
 	{
 		carcurrentPosition--;
 
@@ -215,7 +215,7 @@ void JellyMenuBetter::HandleEvents(GameManager* manager)
 
 	}
 
-	if (_inputHelper->ActionPressed(InputAction::Back))
+	if (_inputHelper->MenuActionPressed(MenuAction::MenuBack))
 	{
 		carcurrentPosition++;
 
@@ -228,7 +228,7 @@ void JellyMenuBetter::HandleEvents(GameManager* manager)
 		_car->SetTireTextures(_levelManager->GetCarImage(_carSkins[carcurrentPosition].tireSmall), _levelManager->GetCarImage(_carSkins[carcurrentPosition].tireBig));
 	}
 
-	if (_inputHelper->ActionPressed(InputAction::Accept))
+	if (_inputHelper->MenuActionPressed(MenuAction::MenuAccept))
 	{
 		_inputHelper->Update();
 
@@ -245,19 +245,19 @@ void JellyMenuBetter::HandleEvents(GameManager* manager)
 		return;
 	}
 
-	if (_inputHelper->ActionPressed(InputAction::Map))
+	if (_inputHelper->ActionPressed(CarAction::Map))
 	{
 		_car->Transform();
 	}
 
 	//car sterins
 	//car torque
-	if (_inputHelper->ActionHold(InputAction::Left))
+	if (_inputHelper->ActionHold(CarAction::Left))
 	{
 		_car->setTorque(-1);
 	}
 
-	if (_inputHelper->ActionHold(InputAction::Right))
+	if (_inputHelper->ActionHold(CarAction::Right))
 	{
 		_car->setTorque(1);
 	}
@@ -265,12 +265,12 @@ void JellyMenuBetter::HandleEvents(GameManager* manager)
 	//chasis torque
 	_car->mChassis->torque = 0.0f;
 
-	if (_inputHelper->ActionHold(InputAction::RotateLeft))
+	if (_inputHelper->ActionHold(CarAction::RotateLeft))
 	{
 		_car->mChassis->torque = -1.0f;
 	}
 
-	if (_inputHelper->ActionHold(InputAction::RotateRight))
+	if (_inputHelper->ActionHold(CarAction::RotateRight))
 	{
 		_car->mChassis->torque = 1.0f;
 	}
@@ -280,7 +280,7 @@ void JellyMenuBetter::HandleEvents(GameManager* manager)
 
 void JellyMenuBetter::Update(GameManager* manager)
 {
-	if (!_inputHelper->ActionHold(InputAction::Left) && !_inputHelper->ActionHold(InputAction::Right))
+	if (!_inputHelper->ActionHold(CarAction::Left) && !_inputHelper->ActionHold(CarAction::Right))
 		_car->setTorque(0);
 
 	//Update physic
@@ -358,17 +358,15 @@ void JellyMenuBetter::Draw(GameManager* manager)
 	_titleFont->AddText(_sceneFiles[currentPosition], _renderManager->GetWidth() / 2, levelTextPositionY + 3, glm::vec3(0.19f, 0.14f, 0.17f), FontCenter);
 	_titleFont->AddText(_sceneFiles[currentPosition], _renderManager->GetWidth() / 2, levelTextPositionY, glm::vec3(1.0f, 0.65f, 0.0f), FontCenter);
 
-	//time
-	char bufferTime[10];
-	sprintf(bufferTime, "%.2f", _levelManager->GetTime(_sceneFiles[currentPosition]));
 
 	int timePositionX = (_renderManager->GetWidth() / 2) - (_levelImage->GetTexture()->GetWidth() / 2);
 	int jumpPositionX = (_renderManager->GetWidth() / 2) + (_levelImage->GetTexture()->GetWidth() / 2);
 
 	int textPosY = (_renderManager->GetHeight() / 2) + 30;
 
-	//_menuFont->AddText(std::string(bufferTime) + "s", 345, 327, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
-	//_menuFont->AddText(std::string(bufferTime) + "s", 345, 325, glm::vec3(0.0f, 0.84f, 0.0f), FontLeft);
+	//time
+	char bufferTime[10];
+	sprintf(bufferTime, "%.2f", _levelManager->GetTime(_sceneFiles[currentPosition]));
 
 	_menuFont->AddText(std::string(bufferTime) + "s", timePositionX, textPosY + 2, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
 	_menuFont->AddText(std::string(bufferTime) + "s", timePositionX, textPosY, glm::vec3(0.0f, 0.84f, 0.0f), FontLeft);
@@ -376,29 +374,25 @@ void JellyMenuBetter::Draw(GameManager* manager)
 	//jump
 	char bufferJump[10];
 	sprintf(bufferJump, "%.2f", _levelManager->GetJump(_sceneFiles[currentPosition]));
-	//_menuFont->AddText(std::string(bufferJump) + "m", 615, 327, glm::vec3(0.19f, 0.14f, 0.17f), FontRight);
-	//_menuFont->AddText(std::string(bufferJump) + "m", 615, 325, glm::vec3(0.71f, 0.16f, 0.18f), FontRight);
 
     _menuFont->AddText(std::string(bufferJump) + "m", jumpPositionX, textPosY+2, glm::vec3(0.19f, 0.14f, 0.17f), FontRight);
 	_menuFont->AddText(std::string(bufferJump) + "m", jumpPositionX, textPosY, glm::vec3(0.71f, 0.16f, 0.18f), FontRight);
 
-	//exit sprite
-	//_inputHelper->ActionSprite(InputAction::Exit)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2) - 40, 515));
-	_inputHelper->ActionSprite(InputAction::Exit)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2) - 40, _renderManager->GetHeight() - 29));
-	_inputHelper->ActionSprite(InputAction::Exit)->Draw(_projection);
-
-	//exit text
-	//_menuFont->AddText("Exit", (_renderManager->GetWidth() / 2) - 90, 525, glm::vec3(0.19f, 0.14f, 0.17f), FontRight);
-	_menuFont->AddText("Exit", (_renderManager->GetWidth() / 2) - 90, _renderManager->GetHeight() - 19, glm::vec3(0.19f, 0.14f, 0.17f), FontRight);
 
 	//options sprite
-	//_inputHelper->ActionSprite(InputAction::Pause)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2) + 40, 515));
-	_inputHelper->ActionSprite(InputAction::Pause)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2) + 40, _renderManager->GetHeight() - 29));
-	_inputHelper->ActionSprite(InputAction::Pause)->Draw(_projection);
+	_inputHelper->MenuActionSprite(MenuAction::MenuPause)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2) - 40, _renderManager->GetHeight() - 29));
+	_inputHelper->MenuActionSprite(MenuAction::MenuPause)->Draw(_projection);
 
 	//options text
-	//vita // _menuFont->AddText("Options", (_renderManager->GetWidth() / 2) + 90, 525, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
-	_menuFont->AddText("Options", (_renderManager->GetWidth() / 2) + 90, _renderManager->GetHeight() - 19, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
+	_menuFont->AddText("Options", (_renderManager->GetWidth() / 2) - 90, _renderManager->GetHeight() - 19, glm::vec3(0.19f, 0.14f, 0.17f), FontRight);
+
+	//exit sprite
+	_inputHelper->MenuActionSprite(MenuAction::MenuExit)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2) + 40, _renderManager->GetHeight() - 29));
+	_inputHelper->MenuActionSprite(MenuAction::MenuExit)->Draw(_projection);
+
+	//exit text
+	_menuFont->AddText("Exit", (_renderManager->GetWidth() / 2) + 90, _renderManager->GetHeight() - 19, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
+
 
 	//level image
 	_levelImage->SetPosition(glm::vec2(_renderManager->GetWidth() / 2, (_renderManager->GetHeight() / 2) - (_levelImage->GetTexture()->GetHeight() / 2)));

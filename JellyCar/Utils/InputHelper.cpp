@@ -9,25 +9,32 @@ InputHelper* InputHelper::_inputHelper = 0;
 
 void InputHelper::PrepareKeyboardMapping()
 {
-	_keyboardMapping.insert(std::pair<InputAction, Key::Code>(InputAction::Down, Key::Code::Down));
-	_keyboardMapping.insert(std::pair<InputAction, Key::Code>(InputAction::Up, Key::Code::Up));
-	_keyboardMapping.insert(std::pair<InputAction, Key::Code>(InputAction::Left, Key::Code::Left));
-	_keyboardMapping.insert(std::pair<InputAction, Key::Code>(InputAction::Right, Key::Code::Right));
+	//menu input
+	_menuKeyboardMapping.insert(std::pair<MenuAction, Key::Code>(MenuAction::MenuDown, Key::Code::Down));
+	_menuKeyboardMapping.insert(std::pair<MenuAction, Key::Code>(MenuAction::MenuUp, Key::Code::Up));
+	_menuKeyboardMapping.insert(std::pair<MenuAction, Key::Code>(MenuAction::MenuLeft, Key::Code::Left));
+	_menuKeyboardMapping.insert(std::pair<MenuAction, Key::Code>(MenuAction::MenuRight, Key::Code::Right));
 
-	_keyboardMapping.insert(std::pair<InputAction, Key::Code>(InputAction::Accept, Key::Code::S));
-	_keyboardMapping.insert(std::pair<InputAction, Key::Code>(InputAction::Back, Key::Code::D));
+	_menuKeyboardMapping.insert(std::pair<MenuAction, Key::Code>(MenuAction::MenuAccept, Key::Code::S));
+	_menuKeyboardMapping.insert(std::pair<MenuAction, Key::Code>(MenuAction::MenuBack, Key::Code::D));
 
-	_keyboardMapping.insert(std::pair<InputAction, Key::Code>(InputAction::Transform, Key::Code::S));
-	_keyboardMapping.insert(std::pair<InputAction, Key::Code>(InputAction::Ballon, Key::Code::D));
-	_keyboardMapping.insert(std::pair<InputAction, Key::Code>(InputAction::Tire, Key::Code::A));
-	_keyboardMapping.insert(std::pair<InputAction, Key::Code>(InputAction::Map, Key::Code::W));
+	_menuKeyboardMapping.insert(std::pair<MenuAction, Key::Code>(MenuAction::MenuPause, Key::Code::Return));
+	_menuKeyboardMapping.insert(std::pair<MenuAction, Key::Code>(MenuAction::MenuExit, Key::Code::Space));
 
-	_keyboardMapping.insert(std::pair<InputAction, Key::Code>(InputAction::RotateLeft, Key::Code::Q));
-	_keyboardMapping.insert(std::pair<InputAction, Key::Code>(InputAction::RotateRight, Key::Code::E));
 
-	_keyboardMapping.insert(std::pair<InputAction, Key::Code>(InputAction::Pause, Key::Code::Return));
-	_keyboardMapping.insert(std::pair<InputAction, Key::Code>(InputAction::Exit, Key::Code::Space));
+	//car input
+	_carKeyboardMapping.insert(std::pair<CarAction, Key::Code>(CarAction::Left, Key::Code::Left));
+	_carKeyboardMapping.insert(std::pair<CarAction, Key::Code>(CarAction::Right, Key::Code::Right));
 
+	_carKeyboardMapping.insert(std::pair<CarAction, Key::Code>(CarAction::Transform, Key::Code::S));
+	_carKeyboardMapping.insert(std::pair<CarAction, Key::Code>(CarAction::Ballon, Key::Code::D));
+	_carKeyboardMapping.insert(std::pair<CarAction, Key::Code>(CarAction::Tire, Key::Code::A));
+	_carKeyboardMapping.insert(std::pair<CarAction, Key::Code>(CarAction::Map, Key::Code::W));
+
+	_carKeyboardMapping.insert(std::pair<CarAction, Key::Code>(CarAction::RotateLeft, Key::Code::Q));
+	_carKeyboardMapping.insert(std::pair<CarAction, Key::Code>(CarAction::RotateRight, Key::Code::E));
+
+	//all keys
 	for (int key = 0; key < Key::Code::Count; key++)
 	{
 		Key::Code code = static_cast<Key::Code>(key);
@@ -37,30 +44,60 @@ void InputHelper::PrepareKeyboardMapping()
 
 void InputHelper::PrepareGamepadMapping()
 {
-	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Accept, Gamepad::Button::Circle));
-	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Back, Gamepad::Button::Cross));
+	//menu input
+    if (_mode == InputActionMode::SWITCH)
+    {
+		_menuGamepadMapping.insert(std::pair<MenuAction, Gamepad::Button>(MenuAction::MenuAccept, Gamepad::Button::Circle));
+		_menuGamepadMapping.insert(std::pair<MenuAction, Gamepad::Button>(MenuAction::MenuBack, Gamepad::Button::Cross));
+    }else if(_mode == InputActionMode::VITA)
+    {
+		_menuGamepadMapping.insert(std::pair<MenuAction, Gamepad::Button>(MenuAction::MenuAccept, Gamepad::Button::Cross));
+		_menuGamepadMapping.insert(std::pair<MenuAction, Gamepad::Button>(MenuAction::MenuBack, Gamepad::Button::Circle));
+    }else
+    {
+		_menuGamepadMapping.insert(std::pair<MenuAction, Gamepad::Button>(MenuAction::MenuAccept, Gamepad::Button::Circle));
+		_menuGamepadMapping.insert(std::pair<MenuAction, Gamepad::Button>(MenuAction::MenuBack, Gamepad::Button::Cross));
+    }
 
-	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Transform, Gamepad::Button::Cross));
-	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Ballon, Gamepad::Button::Circle));
-	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Tire, Gamepad::Button::Square));
-	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Map, Gamepad::Button::Triangle));
+	_menuGamepadMapping.insert(std::pair<MenuAction, Gamepad::Button>(MenuAction::MenuAccept, Gamepad::Button::Circle));
+	_menuGamepadMapping.insert(std::pair<MenuAction, Gamepad::Button>(MenuAction::MenuBack, Gamepad::Button::Cross));
 
-	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Down, Gamepad::Button::Down));
-	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Up, Gamepad::Button::Up));
-	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Left, Gamepad::Button::Left));
-	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Right, Gamepad::Button::Right));
+	_menuGamepadMapping.insert(std::pair<MenuAction, Gamepad::Button>(MenuAction::MenuDown, Gamepad::Button::Down));
+	_menuGamepadMapping.insert(std::pair<MenuAction, Gamepad::Button>(MenuAction::MenuUp, Gamepad::Button::Up));
+	_menuGamepadMapping.insert(std::pair<MenuAction, Gamepad::Button>(MenuAction::MenuLeft, Gamepad::Button::Left));
+	_menuGamepadMapping.insert(std::pair<MenuAction, Gamepad::Button>(MenuAction::MenuRight, Gamepad::Button::Right));
 
-	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::RotateLeft, Gamepad::Button::LTrigger));
-	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::RotateRight, Gamepad::Button::RTrigger));
+	_menuGamepadMapping.insert(std::pair<MenuAction, Gamepad::Button>(MenuAction::MenuPause, Gamepad::Button::Select));
+	_menuGamepadMapping.insert(std::pair<MenuAction, Gamepad::Button>(MenuAction::MenuExit, Gamepad::Button::Start));
 
-	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Pause, Gamepad::Button::Select));
-	_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(InputAction::Exit, Gamepad::Button::Start));
+	//car input
+	_carGamepadMapping.insert(std::pair<CarAction, Gamepad::Button>(CarAction::Left, Gamepad::Button::Left));
+	_carGamepadMapping.insert(std::pair<CarAction, Gamepad::Button>(CarAction::Right, Gamepad::Button::Right));
 
+	_carGamepadMapping.insert(std::pair<CarAction, Gamepad::Button>(CarAction::RotateLeft, Gamepad::Button::LTrigger));
+	_carGamepadMapping.insert(std::pair<CarAction, Gamepad::Button>(CarAction::RotateRight, Gamepad::Button::RTrigger));
+
+	_carGamepadMapping.insert(std::pair<CarAction, Gamepad::Button>(CarAction::Transform, Gamepad::Button::Cross));
+	_carGamepadMapping.insert(std::pair<CarAction, Gamepad::Button>(CarAction::Ballon, Gamepad::Button::Circle));
+	_carGamepadMapping.insert(std::pair<CarAction, Gamepad::Button>(CarAction::Tire, Gamepad::Button::Square));
+	_carGamepadMapping.insert(std::pair<CarAction, Gamepad::Button>(CarAction::Map, Gamepad::Button::Triangle));
+
+
+	//all gamepad buttons
 	for (int key = 0; key < Gamepad::Button::Count; key++)
 	{
 		Gamepad::Button button = static_cast<Gamepad::Button>(key);
 		_buttonPressed.insert(std::pair<Gamepad::Button, bool>(button, false));
 	}
+
+	//menu mapping
+	//_menuMapping.in===
+	//std::vector<Gamepad::Button> upButtons;
+
+	//upButtons.push_back(Gamepad::Button::Up);
+	//upButtons.push_back(Gamepad::Button::LAnalogUp);
+
+	//_menuMapping.insert(std::pair<CarAction, std::vector< Gamepad::Button>>(CarAction::Up,upButtons));
 }
 
 void InputHelper::PrepareNameKeyboardMapping()
@@ -93,23 +130,46 @@ void InputHelper::PrepareSpriteGamepadMapping()
 {
 	_spriteShader = ShaderManager::Instance()->LoadFromFile("sprite", "Assets/Shaders/sprite", "Assets/Shaders/sprite", Textured);
 
+	std::string imageFile = "Assets/Images/buttons_switch.png";
+
+#ifdef ANDROMEDA_VITA
+	imageFile = "Assets/Images/buttons_vita.png";
+#endif
+
+#ifdef ANDROMEDA_SWITCH
+	imageFile = "Assets/Images/buttons_switch.png";
+#endif
+
 	//shapes
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Triangle, new Sprite("_control1", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(17.0f, 5.0f), glm::vec2(78.0f, 78.0f)) ));
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Circle, new Sprite("_control2", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(102.0f, 5.0f), glm::vec2(78.0f, 78.0f)) ));
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Cross, new Sprite("_control3", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(186.0f, 5.0f), glm::vec2(78.0f, 78.0f)) ));
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Square, new Sprite("_control4", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(273.0f, 5.0f), glm::vec2(78.0f, 78.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Triangle, new Sprite("_control1", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(17.0f, 5.0f), glm::vec2(78.0f, 78.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Circle, new Sprite("_control2", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(102.0f, 5.0f), glm::vec2(78.0f, 78.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Cross, new Sprite("_control3", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(186.0f, 5.0f), glm::vec2(78.0f, 78.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Square, new Sprite("_control4", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(273.0f, 5.0f), glm::vec2(78.0f, 78.0f)) ));
 
 	//left,right...
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Left, new Sprite("_control5", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(313.0f, 88.0f), glm::vec2(88.0f, 68.0f)) ));
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Right, new Sprite("_control6", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(413, 82.0f), glm::vec2(88.0f, 68.0f)) ));
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Up, new Sprite("_control7", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(159.0f, 94.0f), glm::vec2(68.0f, 88.0f)) ));
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Down, new Sprite("_control8", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(239.0f, 94.0f), glm::vec2(68.0f, 88.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Left, new Sprite("_control5", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(313.0f, 88.0f), glm::vec2(88.0f, 68.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Right, new Sprite("_control6", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(413, 82.0f), glm::vec2(88.0f, 68.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Up, new Sprite("_control7", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(159.0f, 94.0f), glm::vec2(68.0f, 88.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Down, new Sprite("_control8", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(239.0f, 94.0f), glm::vec2(68.0f, 88.0f)) ));
 
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::LTrigger, new Sprite("_control9", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(6.0f, 87.0f), glm::vec2(128.0f, 60.0f)) ));
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::RTrigger, new Sprite("_control10", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(369.0f, 11.0f), glm::vec2(128.0f, 60.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::LTrigger, new Sprite("_control9", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(6.0f, 87.0f), glm::vec2(128.0f, 60.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::RTrigger, new Sprite("_control10", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(369.0f, 11.0f), glm::vec2(128.0f, 60.0f)) ));
 
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Select, new Sprite("_control11", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(303.0f, 180.0f), glm::vec2(74.0f, 38.0f)) ));
-	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Start, new Sprite("_control12", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(431.0f, 180.0f), glm::vec2(74.0f, 38.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Select, new Sprite("_control11", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(159.0f, 193.0f), glm::vec2(74.0f, 38.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::Start, new Sprite("_control12", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(239.0f, 194.0f), glm::vec2(74.0f, 38.0f)) ));
+
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::LAnalogLeft, new Sprite("_control13", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(3.0f, 248.0f), glm::vec2(116.0f, 116.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::LAnalogRight, new Sprite("_control14", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(121.0f, 248.0f), glm::vec2(116.0f, 116.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::LAnalogUp, new Sprite("_control15", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(242.0f, 248.0f), glm::vec2(116.0f, 116.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::LAnalogDown, new Sprite("_control16", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(361.0f, 248.0f), glm::vec2(116.0f, 116.0f)) ));
+
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::LAnalogPushed, new Sprite("_control16", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(63.0f, 152.0f), glm::vec2(89.0f, 89.0f)) ));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::RAnalogPushed, new Sprite("_control16", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(377.0f, 155.0f), glm::vec2(89.0f, 89.0f)) ));
+
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::RAnalogLeft, new Sprite("_control13", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(3.0f, 369.0f), glm::vec2(116.0f, 116.0f))));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::RAnalogRight, new Sprite("_control14", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(122.0f, 369.0f), glm::vec2(116.0f, 116.0f))));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::RAnalogUp, new Sprite("_control15", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(242.0f, 369.0f), glm::vec2(116.0f, 116.0f))));
+	_spriteGamepadMapping.insert(std::pair<Gamepad::Button, Sprite*>(Gamepad::Button::RAnalogDown, new Sprite("_control16", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(361.0f, 369.0f), glm::vec2(116.0f, 116.0f))));
 
 	_spriteGamepadMapping[Gamepad::Button::Triangle]->SetScale(glm::vec2(0.4f, 0.4f));
 	_spriteGamepadMapping[Gamepad::Button::Circle]->SetScale(glm::vec2(0.4f, 0.4f));
@@ -123,29 +183,53 @@ void InputHelper::PrepareSpriteGamepadMapping()
 
 	_spriteGamepadMapping[Gamepad::Button::LTrigger]->SetScale(glm::vec2(0.5f, 0.5f));
 	_spriteGamepadMapping[Gamepad::Button::RTrigger]->SetScale(glm::vec2(0.5f, 0.5f));
+
+	_spriteGamepadMapping[Gamepad::Button::LAnalogPushed]->SetScale(glm::vec2(0.4f, 0.4f));
+	_spriteGamepadMapping[Gamepad::Button::RAnalogPushed]->SetScale(glm::vec2(0.4f, 0.4f));
+
+	_spriteGamepadMapping[Gamepad::Button::LAnalogLeft]->SetScale(glm::vec2(0.35f, 0.35f));
+	_spriteGamepadMapping[Gamepad::Button::LAnalogRight]->SetScale(glm::vec2(0.35f, 0.35f));
+	_spriteGamepadMapping[Gamepad::Button::LAnalogUp]->SetScale(glm::vec2(0.35f, 0.35f));
+	_spriteGamepadMapping[Gamepad::Button::LAnalogDown]->SetScale(glm::vec2(0.35f, 0.35f));
+
+	_spriteGamepadMapping[Gamepad::Button::RAnalogLeft]->SetScale(glm::vec2(0.35f, 0.35f));
+	_spriteGamepadMapping[Gamepad::Button::RAnalogRight]->SetScale(glm::vec2(0.35f, 0.35f));
+	_spriteGamepadMapping[Gamepad::Button::RAnalogUp]->SetScale(glm::vec2(0.35f, 0.35f));
+	_spriteGamepadMapping[Gamepad::Button::RAnalogDown]->SetScale(glm::vec2(0.35f, 0.35f));
 }
 
 void InputHelper::PrepareSpriteKeyboardMapping()
 {
 	_spriteShader = ShaderManager::Instance()->LoadFromFile("sprite", "Assets/Shaders/sprite", "Assets/Shaders/sprite", Textured);
 
+	std::string imageFile = "Assets/Images/buttons_vita.png";
+
+#ifdef ANDROMEDA_VITA
+	imageFile = "Assets/Images/buttons_vita.png";
+#endif
+
+#ifdef ANDROMEDA_SWITCH
+	imageFile = "Assets/Images/buttons_switch.png";
+#endif
+
 	//shapes
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::W, new Sprite("_control1", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(17.0f, 5.0f), glm::vec2(78.0f, 78.0f))));
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::D, new Sprite("_control2", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(102.0f, 5.0f), glm::vec2(78.0f, 78.0f))));
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::S, new Sprite("_control3", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(186.0f, 5.0f), glm::vec2(78.0f, 78.0f))));
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::A, new Sprite("_control4", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(273.0f, 5.0f), glm::vec2(78.0f, 78.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::W, new Sprite("_control1", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(17.0f, 5.0f), glm::vec2(78.0f, 78.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::D, new Sprite("_control2", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(102.0f, 5.0f), glm::vec2(78.0f, 78.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::S, new Sprite("_control3", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(186.0f, 5.0f), glm::vec2(78.0f, 78.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::A, new Sprite("_control4", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(273.0f, 5.0f), glm::vec2(78.0f, 78.0f))));
 
 	//left,right...
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Left, new Sprite("_control5", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(313.0f, 88.0f), glm::vec2(88.0f, 68.0f))));
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Right, new Sprite("_control6", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(413, 82.0f), glm::vec2(88.0f, 68.0f))));
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Up, new Sprite("_control7", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(159.0f, 94.0f), glm::vec2(68.0f, 88.0f))));
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Down, new Sprite("_control8", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(239.0f, 94.0f), glm::vec2(68.0f, 88.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Left, new Sprite("_control5", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(313.0f, 88.0f), glm::vec2(88.0f, 68.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Right, new Sprite("_control6", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(413, 82.0f), glm::vec2(88.0f, 68.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Up, new Sprite("_control7", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(159.0f, 94.0f), glm::vec2(68.0f, 88.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Down, new Sprite("_control8", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(239.0f, 94.0f), glm::vec2(68.0f, 88.0f))));
 
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Q, new Sprite("_control9", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(6.0f, 87.0f), glm::vec2(128.0f, 60.0f))));
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::E, new Sprite("_control10", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(369.0f, 11.0f), glm::vec2(128.0f, 60.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Q, new Sprite("_control9", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(6.0f, 87.0f), glm::vec2(128.0f, 60.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::E, new Sprite("_control10", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(369.0f, 11.0f), glm::vec2(128.0f, 60.0f))));
 
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Space, new Sprite("_control11", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(303.0f, 180.0f), glm::vec2(74.0f, 38.0f))));
-	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Return, new Sprite("_control12", TextureManager::Instance()->LoadFromFile("Assets/Images/switch_buttons.png", TextureFilerType::NearestFilter), _spriteShader, glm::vec2(431.0f, 180.0f), glm::vec2(74.0f, 38.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Space, new Sprite("_control11", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(159.0f, 193.0f), glm::vec2(74.0f, 38.0f))));
+	_spriteKeyboardMapping.insert(std::pair<Key::Code, Sprite*>(Key::Code::Return, new Sprite("_control12", TextureManager::Instance()->LoadFromFile(imageFile, TextureFilerType::NearestFilter), _spriteShader, glm::vec2(239.0f, 194.0f), glm::vec2(74.0f, 38.0f))));
+
 
 	_spriteKeyboardMapping[Key::Code::Left]->SetScale(glm::vec2(0.4f, 0.4f));
 	_spriteKeyboardMapping[Key::Code::Right]->SetScale(glm::vec2(0.4f, 0.4f));
@@ -190,9 +274,14 @@ InputHelper::InputHelper()
 #endif		
 	}
 
-	for (size_t i = 0; i < InputAction::Count; i++)
+	for (size_t i = 0; i < CarAction::Count; i++)
 	{
-		_actionPressed.insert(std::pair<InputAction, bool>(static_cast<InputAction>(i), false));
+		_carActionPressed.insert(std::pair<CarAction, bool>(static_cast<CarAction>(i), false));
+	}
+
+	for (size_t i = 0; i < MenuAction::MenuCount; i++)
+	{
+		_menuActionPressed.insert(std::pair<MenuAction, bool>(static_cast<MenuAction>(i), false));
 	}
 
 	if (_mode == InputActionMode::PC)
@@ -234,9 +323,9 @@ InputHelper* InputHelper::Instance()
 
 InputHelper::~InputHelper()
 {
-	_actionPressed.clear();
-	_keyboardMapping.clear();
-	_gamepadMapping.clear();
+	//_actionPressed.clear();
+	//_keyboardMapping.clear();
+	//_gamepadMapping.clear();
 
 	{
 		std::map<Gamepad::Button, Sprite*>::iterator iter;
@@ -261,21 +350,21 @@ InputHelper::~InputHelper()
 	}
 }
 
-bool InputHelper::ActionPressed(InputAction action)
+bool InputHelper::ActionPressed(CarAction action)
 {
 	if (_mode == InputActionMode::PC)
 	{
-		if (_keyboard->KeyDown(_keyboardMapping[action]) && !_actionPressed[action])
+		if (_keyboard->KeyDown(_carKeyboardMapping[action]) && !_carActionPressed[action])
 		{
-			_actionPressed[action] = true;
+			_carActionPressed[action] = true;
 			return true;
 		}
 	}
 	else
 	{
-		if (_gamepad->KeyDown(_gamepadMapping[action]) && !_actionPressed[action])
+		if (_gamepad->KeyDown(_carGamepadMapping[action]) && !_carActionPressed[action])
 		{
-			_actionPressed[action] = true;
+			_carActionPressed[action] = true;
 			return true;
 		}
 	}
@@ -283,18 +372,40 @@ bool InputHelper::ActionPressed(InputAction action)
 	return false;
 }
 
-bool InputHelper::ActionHold(InputAction action)
+bool InputHelper::MenuActionPressed(MenuAction action)
 {
 	if (_mode == InputActionMode::PC)
 	{
-		if (_keyboard->KeyDown(_keyboardMapping[action]))
+		if (_keyboard->KeyDown(_menuKeyboardMapping[action]) && !_menuActionPressed[action])
+		{
+			_menuActionPressed[action] = true;
+			return true;
+		}
+	}
+	else
+	{
+		if (_gamepad->KeyDown(_menuGamepadMapping[action]) && !_menuActionPressed[action])
+		{
+			_menuActionPressed[action] = true;
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool InputHelper::ActionHold(CarAction action)
+{
+	if (_mode == InputActionMode::PC)
+	{
+		if (_keyboard->KeyDown(_carKeyboardMapping[action]))
 		{
 			return true;
 		}
 	}
 	else
 	{
-		if (_gamepad->KeyDown(_gamepadMapping[action]))
+		if (_gamepad->KeyDown(_carGamepadMapping[action]))
 		{
 			return true;
 		}
@@ -354,29 +465,57 @@ void InputHelper::UpdateAllInputs(bool state)
 
 void InputHelper::Update()
 {
-	for (size_t i = 0; i < InputAction::Count; i++)
+	for (size_t i = 0; i < CarAction::Count; i++)
 	{
-		InputAction action = static_cast<InputAction>(i);
+		CarAction action = static_cast<CarAction>(i);
 		if (_mode == InputActionMode::PC)
 		{
 			// check action
-			if (_keyboard->KeyUp(_keyboardMapping[action]))
+			if (_keyboard->KeyUp(_carKeyboardMapping[action]))
 			{
-				_actionPressed[action] = false;
+				_carActionPressed[action] = false;
 			}else
 			{
-				_actionPressed[action] = true;
+				_carActionPressed[action] = true;
 			}				
 		}
 		else
 		{
-			if (_gamepad->KeyUp(_gamepadMapping[action]))
+			if (_gamepad->KeyUp(_carGamepadMapping[action]))
 			{
-				_actionPressed[action] = false;
+				_carActionPressed[action] = false;
 			}else
 			{
-				_actionPressed[action] = true;
+				_carActionPressed[action] = true;
 			}			
+		}
+	}
+
+	for (size_t i = 0; i < MenuAction::MenuCount; i++)
+	{
+		MenuAction action = static_cast<MenuAction>(i);
+		if (_mode == InputActionMode::PC)
+		{
+			// check action
+			if (_keyboard->KeyUp(_menuKeyboardMapping[action]))
+			{
+				_menuActionPressed[action] = false;
+			}
+			else
+			{
+				_menuActionPressed[action] = true;
+			}
+		}
+		else
+		{
+			if (_gamepad->KeyUp(_menuGamepadMapping[action]))
+			{
+				_menuActionPressed[action] = false;
+			}
+			else
+			{
+				_menuActionPressed[action] = true;
+			}
 		}
 	}
 
@@ -416,7 +555,7 @@ void InputHelper::Update()
 	}
 }
 
-bool InputHelper::ChangeInputForAction(InputAction action)
+bool InputHelper::ChangeInputForAction(CarAction action)
 {
 	if (_mode == InputActionMode::PC)
 	{
@@ -426,7 +565,7 @@ bool InputHelper::ChangeInputForAction(InputAction action)
 
 			if (_keyboard->KeyDown(code) && !_keyPresseddMapping[code])
 			{
-				_keyboardMapping[action] = code;
+				_carKeyboardMapping[action] = code;
 				_updateAll = false;
 				return true;
 			}			
@@ -440,7 +579,7 @@ bool InputHelper::ChangeInputForAction(InputAction action)
 
 			if (_gamepad->KeyDown(button) && !_buttonPressed[button])
 			{
-				_gamepadMapping[action] = button;
+				_carGamepadMapping[action] = button;
 				_updateAll = false;
 				return true;
 			}
@@ -450,29 +589,44 @@ bool InputHelper::ChangeInputForAction(InputAction action)
 	return false;
 }
 
-Sprite* InputHelper::ActionSprite(InputAction action)
+Sprite* InputHelper::CarActionSprite(CarAction action)
 {
 	if (_mode == InputActionMode::PC)
 	{
-		return _spriteKeyboardMapping[_keyboardMapping[action]];
+		return _spriteKeyboardMapping[_carKeyboardMapping[action]];
 	}
 	else
 	{
-		return _spriteGamepadMapping[_gamepadMapping[action]];
+		return _spriteGamepadMapping[_carGamepadMapping[action]];
 	}
 
-	return 0;
+	return nullptr;
 }
 
-std::string InputHelper::InputName(InputAction action)
+Sprite* InputHelper::MenuActionSprite(MenuAction action)
 {
 	if (_mode == InputActionMode::PC)
 	{
-		return _nameKeyboardMapping[_keyboardMapping[action]];
+		return _spriteKeyboardMapping[_menuKeyboardMapping[action]];
 	}
 	else
 	{
-		return _nameGamepadMapping[_gamepadMapping[action]];
+		return _spriteGamepadMapping[_menuGamepadMapping[action]];
+	}
+
+	return nullptr;
+}
+
+
+std::string InputHelper::InputName(CarAction action)
+{
+	if (_mode == InputActionMode::PC)
+	{
+		return _nameKeyboardMapping[_carKeyboardMapping[action]];
+	}
+	else
+	{
+		return _nameGamepadMapping[_carGamepadMapping[action]];
 	}
 
 	return "";
@@ -504,16 +658,16 @@ std::map<int, int> InputHelper::GetActionKeyMapping()
 {
 	std::map<int, int> _actionKeyMapping;
 
-	for (size_t i = 0; i < InputAction::Count; i++)
+	for (size_t i = 0; i < CarAction::Count; i++)
 	{
-		InputAction action = static_cast<InputAction>(i);
+		CarAction action = static_cast<CarAction>(i);
 		if (_mode == InputActionMode::PC)
 		{
-			_actionKeyMapping.insert(std::pair<int, int>(i, _keyboardMapping[action]));
+			_actionKeyMapping.insert(std::pair<int, int>(i, _carKeyboardMapping[action]));
 		}
 		else
 		{
-			_actionKeyMapping.insert(std::pair<int, int>(i, _gamepadMapping[action]));
+			_actionKeyMapping.insert(std::pair<int, int>(i, _carGamepadMapping[action]));
 		}
 	}
 
@@ -525,28 +679,28 @@ void InputHelper::SetActionKeyMapping(std::map<int, int> mapping)
 {
 	if (_mode == InputActionMode::PC)
 	{
-		_keyboardMapping.clear();
+		_carKeyboardMapping.clear();
 	}
 	else
 	{
-		_gamepadMapping.clear();
+		_carGamepadMapping.clear();
 	}
 
 	typedef std::map<int, int>::iterator it_type;
 	for (it_type iterator = mapping.begin(); iterator != mapping.end(); iterator++)
 	{
-		InputAction action = static_cast<InputAction>(iterator->first);
+		CarAction action = static_cast<CarAction>(iterator->first);
 		
 		if (_mode == InputActionMode::PC)
 		{
 			Key::Code code = static_cast<Key::Code>(iterator->second);
-			_keyboardMapping.insert(std::pair<InputAction, Key::Code>(action, code));
+			_carKeyboardMapping.insert(std::pair<CarAction, Key::Code>(action, code));
 		}
 		else
 		{
 
 			Gamepad::Button button = static_cast<Gamepad::Button>(iterator->second);
-			_gamepadMapping.insert(std::pair<InputAction, Gamepad::Button>(action, button));
+			_carGamepadMapping.insert(std::pair<CarAction, Gamepad::Button>(action, button));
 		}
 	}
 }

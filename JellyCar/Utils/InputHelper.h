@@ -2,31 +2,40 @@
 #define InputHelper_H
 
 #include <Andromeda/Input/InputManager.h>
+
 using namespace Andromeda::Input;
 
 #include <Andromeda/Graphics/Sprite.h>
 using namespace Andromeda::Graphics;
 
 #include <map>
+#include <vector>
 #include <string>
 
-enum InputAction
+enum CarAction
 {
-	Down = 0,
-	Up = 1,
-	Left = 2,
-	Right = 3,
-	RotateLeft = 4,
-	RotateRight = 5,
-	Accept = 6,
-	Back = 7,
-	Transform = 8,
-	Ballon = 9,
-	Tire = 10,
-	Map = 11,
-	Pause = 12,
-	Exit = 13,
-	Count = 14
+	Left = 0,
+	Right = 1,
+	RotateLeft = 2,
+	RotateRight = 3,
+	Transform = 4,
+	Ballon = 5,
+	Tire = 6,
+	Map = 7,
+	Count = 8
+};
+
+enum MenuAction
+{
+    MenuUp,
+	MenuDown,
+	MenuLeft,
+	MenuRight,
+	MenuAccept,
+	MenuBack,
+	MenuPause,
+	MenuExit,
+	MenuCount
 };
 
 enum InputActionMode
@@ -56,13 +65,22 @@ private:
 	bool _updateAll;
 
 	//key state
-	std::map<InputAction, bool> _actionPressed;
 	std::map<Gamepad::Button, bool> _buttonPressed;
 	std::map<Key::Code, bool> _keyPresseddMapping;
 
 	//keys mapping
-	std::map<InputAction, Key::Code> _keyboardMapping;
-	std::map<InputAction, Gamepad::Button> _gamepadMapping;
+	std::map<CarAction, Key::Code> _carKeyboardMapping;
+	std::map<CarAction, Gamepad::Button> _carGamepadMapping;
+
+	std::map<MenuAction, Key::Code> _menuKeyboardMapping;
+	std::map<MenuAction, Gamepad::Button> _menuGamepadMapping;
+
+	//
+	std::map<CarAction, bool> _carActionPressed;
+	std::map<MenuAction, bool> _menuActionPressed;
+
+	//menu mapping
+	std::map<MenuAction, std::vector< Gamepad::Button>> _menuMapping;
 
 	//sprite mapping
 	Shader* _spriteShader;
@@ -92,21 +110,25 @@ public:
 	void Update();
 	void UpdateAllInputs(bool state);
 
-	bool ActionPressed(InputAction action);
-	bool ActionHold(InputAction action);
+	bool ActionPressed(CarAction action);
+	bool ActionHold(CarAction action);
+
+	bool MenuActionPressed(MenuAction action);
 
 	int GetTouchCount();
 	glm::vec2 GetTouchPosition(int touch);
 
 	glm::vec2 TouchToScreen(glm::vec4 screenBound,glm::vec2 touch);
 
-	Sprite* ActionSprite(InputAction action);
-	bool ChangeInputForAction(InputAction action);
+	Sprite* CarActionSprite(CarAction action);
+	Sprite* MenuActionSprite(MenuAction action);
+
+	bool ChangeInputForAction(CarAction action);
 
 	std::map<int, int> GetActionKeyMapping();
 	void SetActionKeyMapping(std::map<int, int> mapping);
 
-	std::string InputName(InputAction action);
+	std::string InputName(CarAction action);
 
 	void LoadSettings();
 	void SaveSettings();

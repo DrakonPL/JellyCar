@@ -1,5 +1,4 @@
 #include <Andromeda/Graphics/RenderManager.h>
-#include "Andromeda/Graphics/Sprite.h"
 #include <Andromeda/Utils/Logger.h>
 
 #include "JellyGameManager.h"

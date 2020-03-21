@@ -175,20 +175,25 @@ void JellyOptions::InitLibs()
 
 void JellyOptions::InitActionNames()
 {
-	_actionNames.push_back("Down");
-	_actionNames.push_back("Up");
-	_actionNames.push_back("Left");
-	_actionNames.push_back("Right");
-	_actionNames.push_back("Rotate Left");
-	_actionNames.push_back("Rotate Right");
-	_actionNames.push_back("Accept");
-	_actionNames.push_back("Back");
-	_actionNames.push_back("Transform");
-	_actionNames.push_back("Ballon");
-	_actionNames.push_back("Sticky tire");
-	_actionNames.push_back("Map");
-	_actionNames.push_back("Pause");
-	_actionNames.push_back("Exit");
+	_carActions.push_back(CarAction::Left);
+	_carActions.push_back(CarAction::Right);
+	_carActions.push_back(CarAction::RotateLeft);
+	_carActions.push_back(CarAction::RotateRight);
+
+	_carActions.push_back(CarAction::Transform);
+	_carActions.push_back(CarAction::Ballon);
+	_carActions.push_back(CarAction::Tire);
+	_carActions.push_back(CarAction::Map);
+
+	_actionTranslation.insert(std::pair<CarAction, std::string>(CarAction::Left, "Left"));
+	_actionTranslation.insert(std::pair<CarAction, std::string>(CarAction::Right, "Right"));
+	_actionTranslation.insert(std::pair<CarAction, std::string>(CarAction::RotateLeft, "Rotate Left"));
+	_actionTranslation.insert(std::pair<CarAction, std::string>(CarAction::RotateRight, "Rotate Right"));
+
+	_actionTranslation.insert(std::pair<CarAction, std::string>(CarAction::Transform, "Transform"));
+	_actionTranslation.insert(std::pair<CarAction, std::string>(CarAction::Ballon, "Ballon"));
+	_actionTranslation.insert(std::pair<CarAction, std::string>(CarAction::Tire, "Sticky tire"));
+	_actionTranslation.insert(std::pair<CarAction, std::string>(CarAction::Map, "Map"));
 }
 
 void JellyOptions::Enter()
@@ -223,7 +228,7 @@ void JellyOptions::CleanUp()
 
     _credits.clear();
     _libs.clear();
-    _actionNames.clear();
+	_actionTranslation.clear();
 }
 
 void JellyOptions::Pause()
@@ -251,7 +256,7 @@ void JellyOptions::HandleEvents(GameManager* manager)
 	if (_optionsState == Menu)
 	{
 		//keys
-		if (_inputHelper->ActionPressed(InputAction::Left))
+		if (_inputHelper->ActionPressed(CarAction::Left))
 		{
 			_menuBodySelected--;
 
@@ -262,7 +267,7 @@ void JellyOptions::HandleEvents(GameManager* manager)
 		}
 
 		//move down
-		if (_inputHelper->ActionPressed(InputAction::Right))
+		if (_inputHelper->ActionPressed(CarAction::Right))
 		{
 			_menuBodySelected++;
 			if (_menuBodySelected > _menuBodies.size() - 1)
@@ -348,7 +353,7 @@ void JellyOptions::HandleEvents(GameManager* manager)
 			}
 		}
 
-		if (_inputHelper->ActionPressed(InputAction::Accept))
+		if (_inputHelper->MenuActionPressed(MenuAction::MenuAccept))
 		{
 			
 			if (_menuBodies[_menuBodySelected]->GetName() == "options_libs")
@@ -379,7 +384,7 @@ void JellyOptions::HandleEvents(GameManager* manager)
 			}
 		}
 
-		if (_inputHelper->ActionPressed(InputAction::Back))
+		if (_inputHelper->MenuActionPressed(MenuAction::MenuBack))
 		{
 			manager->PopState();
 			return;
@@ -398,7 +403,7 @@ void JellyOptions::HandleEvents(GameManager* manager)
 		}else
 		{
 			//move up
-			if (_inputHelper->ActionPressed(InputAction::Up))
+			if (_inputHelper->MenuActionPressed(MenuAction::MenuUp))
 			{
 				_selctedPosition--;
 				if (_selctedPosition < 0)
@@ -408,25 +413,25 @@ void JellyOptions::HandleEvents(GameManager* manager)
 			}
 
 			//move down
-			if (_inputHelper->ActionPressed(InputAction::Down))
+			if (_inputHelper->MenuActionPressed(MenuAction::MenuDown))
 			{
 				_selctedPosition++;
-				if (_selctedPosition > _actionNames.size() - 1)
+				if (_selctedPosition > _carActions.size() - 1)
 				{
-					_selctedPosition = _actionNames.size() - 1;
+					_selctedPosition = _carActions.size() - 1;
 				}
 			}
 
-			if (_inputHelper->ActionPressed(InputAction::Accept))
+			if (_inputHelper->MenuActionPressed(MenuAction::MenuAccept))
 			{
 				//check action to process
-				_selectedAction = static_cast<InputAction>(_selctedPosition);
+				_selectedAction = _carActions[_selctedPosition];
 				_changeBinding = true;
 
 				_inputHelper->UpdateAllInputs(true);
 			}
 
-			if (_inputHelper->ActionPressed(InputAction::Back))
+			if (_inputHelper->MenuActionPressed(MenuAction::MenuBack))
 			{
 				//save settings
 				_inputHelper->SaveSettings();
@@ -438,7 +443,7 @@ void JellyOptions::HandleEvents(GameManager* manager)
 	}else if (_optionsState == JellyOptionsState::Sound)
 	{
 		//move up
-		if (_inputHelper->ActionPressed(InputAction::Up))
+		if (_inputHelper->MenuActionPressed(MenuAction::MenuUp))
 		{
 			_soundPosition--;
 			if (_soundPosition < 0)
@@ -455,7 +460,7 @@ void JellyOptions::HandleEvents(GameManager* manager)
 		}
 
 		//move down
-		if (_inputHelper->ActionPressed(InputAction::Down))
+		if (_inputHelper->MenuActionPressed(MenuAction::MenuDown))
 		{
 			_soundPosition++;
 			if (_soundPosition > 2)
@@ -471,7 +476,7 @@ void JellyOptions::HandleEvents(GameManager* manager)
 			}
 		}
 
-		if (_inputHelper->ActionPressed(InputAction::Left))
+		if (_inputHelper->MenuActionPressed(MenuAction::MenuLeft))
 		{
 			if (_soundPosition == 0)
 			{
@@ -509,7 +514,7 @@ void JellyOptions::HandleEvents(GameManager* manager)
 		}
 
 		//move down
-		if (_inputHelper->ActionPressed(InputAction::Right))
+		if (_inputHelper->MenuActionPressed(MenuAction::MenuRight))
 		{
 			if (_soundPosition == 0)
 			{
@@ -546,7 +551,7 @@ void JellyOptions::HandleEvents(GameManager* manager)
 			}
 		}
 
-		if (_inputHelper->ActionPressed(InputAction::Back))
+		if (_inputHelper->MenuActionPressed(MenuAction::MenuBack))
 		{
 			//cave settings
 			_audioHelper->SaveSettings();
@@ -560,7 +565,7 @@ void JellyOptions::HandleEvents(GameManager* manager)
 	}
 	else
 	{
-		if (_inputHelper->ActionPressed(InputAction::Back))
+		if (_inputHelper->MenuActionPressed(MenuAction::MenuBack))
 		{
 			_optionsState = Menu;
 		}
@@ -912,52 +917,52 @@ void JellyOptions::Draw(GameManager* manager)
 			//draw backgroud bar
 			_backSelectSprite->SetScale(glm::vec2(0.5f,1.0f));
 
-			if (_selctedPosition < 7)
+			if (_selctedPosition < 4)
 			{
 				_backSelectSprite->SetPosition(glm::vec2(centerX - 128, startPosition - 10 + (_selctedPosition * step)));
 			}
 			else
 			{
-				_backSelectSprite->SetPosition(glm::vec2(centerX + 128, startPosition - 10 + (_selctedPosition * step) - (step * 7)));
+				_backSelectSprite->SetPosition(glm::vec2(centerX + 128, startPosition - 10 + (_selctedPosition * step) - (step * 4)));
 			}			
 			
 			_backSelectSprite->Draw(_projection);
 
-			_titleFont->AddText("Controls", centerX, 57, glm::vec3(0.19f, 0.14f, 0.17f), FontCenter);
-			_titleFont->AddText("Controls", centerX, 54, glm::vec3(1.0f, 0.65f, 0.0f), FontCenter);			
+			_titleFont->AddText("Car Controls", centerX, 57, glm::vec3(0.19f, 0.14f, 0.17f), FontCenter);
+			_titleFont->AddText("Car Controls", centerX, 54, glm::vec3(1.0f, 0.65f, 0.0f), FontCenter);			
 
 			//draw text
 			int startY = startPosition;
 
 			//7 left positions
-			for (size_t i = 0; i < 7; i++)
+			for (size_t i = 0; i < 4; i++)
 			{
-				_menuFont->AddText(_actionNames[i], centerX - 90, startY, glm::vec3(0.19f, 0.14f, 0.17f), FontRight);
-				_menuFont->AddText(_actionNames[i], centerX - 90, startY - 2, glm::vec3(1.0f, 0.65f, 0.0f), FontRight);
+				_menuFont->AddText(_actionTranslation[_carActions[i]], centerX - 90, startY, glm::vec3(0.19f, 0.14f, 0.17f), FontRight);
+				_menuFont->AddText(_actionTranslation[_carActions[i]], centerX - 90, startY - 2, glm::vec3(1.0f, 0.65f, 0.0f), FontRight);
 
 				startY += step;
 			}
 
 			//7 right positions
 			startY = startPosition;
-			for (size_t i = 7; i < _actionNames.size(); i++)
+			for (size_t i = 4; i < _carActions.size(); i++)
 			{
-				_menuFont->AddText(_actionNames[i], centerX + 90, startY, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
-				_menuFont->AddText(_actionNames[i], centerX + 90, startY - 2 , glm::vec3(1.0f, 0.65f, 0.0f), FontLeft);
+				_menuFont->AddText(_actionTranslation[_carActions[i]], centerX + 90, startY, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
+				_menuFont->AddText(_actionTranslation[_carActions[i]], centerX + 90, startY - 2 , glm::vec3(1.0f, 0.65f, 0.0f), FontLeft);
 
 				startY += step;
 			}
 
 			//draw 7 left icons
 			startY = startPosition - 10;
-			for (size_t i = 0; i < 7; i++)
+			for (size_t i = 0; i < 4; i++)
 			{
-				InputAction action = static_cast<InputAction>(i);
+				//InputAction action = static_cast<InputAction>(i);
 
 				if (!(_changeBinding && i == _selctedPosition))
 				{
-					_inputHelper->ActionSprite(action)->SetPosition(glm::vec2(centerX - 40, startY));
-					_inputHelper->ActionSprite(action)->Draw(_projection);
+					_inputHelper->CarActionSprite(_carActions[i])->SetPosition(glm::vec2(centerX - 40, startY));
+					_inputHelper->CarActionSprite(_carActions[i])->Draw(_projection);
 
 					//_menuFont->AddText(_inputHelper->InputName(action), glm::vec2(centerX - 40, startY + 10), glm::vec3(0.19f, 0.14f, 0.17f), FontCenter);
 				}
@@ -967,14 +972,14 @@ void JellyOptions::Draw(GameManager* manager)
 
 			//draw 7 right icons
 			startY = startPosition - 10;
-			for (size_t i = 7; i < InputAction::Count; i++)
+			for (size_t i = 4; i < _carActions.size(); i++)
 			{
-				InputAction action = static_cast<InputAction>(i);
+				//InputAction action = static_cast<InputAction>(i);
 
 				if (!(_changeBinding && i == _selctedPosition))
 				{
-					_inputHelper->ActionSprite(action)->SetPosition(glm::vec2(centerX + 40, startY));
-					_inputHelper->ActionSprite(action)->Draw(_projection);
+					_inputHelper->CarActionSprite(_carActions[i])->SetPosition(glm::vec2(centerX + 40, startY));
+					_inputHelper->CarActionSprite(_carActions[i])->Draw(_projection);
 
 					//_menuFont->AddText(_inputHelper->InputName(action), glm::vec2(centerX + 40, startY + 10), glm::vec3(0.19f, 0.14f, 0.17f), FontCenter);
 				}				
@@ -1023,8 +1028,8 @@ void JellyOptions::Draw(GameManager* manager)
 
 	//back to menu
 	//_inputHelper->ActionSprite(InputAction::Back)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2), 528));
-	_inputHelper->ActionSprite(InputAction::Back)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2), _renderManager->GetHeight() - 20));
-	_inputHelper->ActionSprite(InputAction::Back)->Draw(_projection);
+	_inputHelper->MenuActionSprite(MenuAction::MenuBack)->SetPosition(glm::vec2((_renderManager->GetWidth() / 2), _renderManager->GetHeight() - 20));
+	_inputHelper->MenuActionSprite(MenuAction::MenuBack)->Draw(_projection);
 
 	//back text
 	//_menuFont->AddText("Back", (_renderManager->GetWidth() / 2) + 30, 538, glm::vec3(0.19f, 0.14f, 0.17f), FontLeft);
