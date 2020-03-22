@@ -65,7 +65,7 @@ CFLAGS	+=	$(INCLUDE) -D__SWITCH__
 ASFLAGS	:=	-g $(ARCH)
 LDFLAGS	=	-specs=$(DEVKITPRO)/libnx/switch.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 
-LIBS	:= -lnx -lglad -lEGL -lglapi -ldrm_nouveau -lpthread -lz -lm -lstdc++ -lfreetype -lpng -lbz2 -lBulletDynamics -lBulletCollision -lLinearMath `aarch64-none-elf-pkg-config --libs  sdl2 SDL2_mixer` 
+LIBS	:= -lnx -lglad -lEGL -lglapi -ldrm_nouveau -lpthread -lz -lm -lstdc++ -lfreetype -lpng -lbz2 `aarch64-none-elf-pkg-config --libs  sdl2 SDL2_mixer` 
 
 
 #---------------------------------------------------------------------------------
