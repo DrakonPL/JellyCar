@@ -11,6 +11,7 @@ Current implemetation uses my library: [Andromeda-Lib](https://github.com/Drakon
 
 ## Build instructions.
 
+### Important
 For all platforms you must clone first 
 [Andromeda-Lib](https://github.com/DrakonPL/Andromeda-Lib) , then this repository.
 
